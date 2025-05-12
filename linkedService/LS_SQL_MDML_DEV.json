@@ -1,0 +1,15 @@
+{
+	"name": "LS_SQL_MDML_DEV",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "azuresql-etl20240819.database.windows.net",
+			"database": "THOM-DB-DEV-MDML-EastUS",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SystemAssignedManagedIdentity"
+		}
+	}
+}

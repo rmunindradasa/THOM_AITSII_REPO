@@ -1,0 +1,21 @@
+{
+	"name": "CMR_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_File_CMR1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation",
+				"fileName": "file-aitsi-ems-etl-20250328.zip"
+			},
+			"compression": {
+				"type": "ZipDeflate"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

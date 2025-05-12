@@ -1,0 +1,14 @@
+{
+	"name": "THOM-DF-DEV-CMR2MDML-EastUS",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "false"
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "4012acd6-fb3f-4183-9e69-273d13e7ad5f",
+		"tenantId": "b51e4e79-11b6-43de-90d8-5f073535f420"
+	}
+}

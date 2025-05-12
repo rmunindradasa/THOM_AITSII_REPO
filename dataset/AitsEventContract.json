@@ -1,0 +1,291 @@
+{
+	"name": "AitsEventContract",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DEV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "systemGeneratedName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "selfReportedOtherCategory",
+				"type": "nvarchar"
+			},
+			{
+				"name": "purpose",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EVENT_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cost",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "LOCATION_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STREET_ADDRESS1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STREET_ADDRESS2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "city",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stateLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zipCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fk_fiscalYearId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fk_afteractionId",
+				"type": "nchar"
+			},
+			{
+				"name": "fk_fundingMcrcUnitId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "fk_purchaseRequestId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fk_parentEventContractId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fk_proposalFileId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fk_promotionId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "assignedOwner",
+				"type": "nvarchar"
+			},
+			{
+				"name": "statusLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "subStatusLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "dateContractSigned",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "deliverables",
+				"type": "nvarchar"
+			},
+			{
+				"name": "additionalDeliverables",
+				"type": "nvarchar"
+			},
+			{
+				"name": "personalInNatureDeliverables",
+				"type": "nvarchar"
+			},
+			{
+				"name": "estimatedAttendence",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "estimatedNumberOfInfluencerContacts",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "estimatedNumberOfLeads",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "estimatedNumberOfOverallInteractions",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "estimatedNumberOfSocialMediaImpressions",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "estimatedNumberOfSocialMediaPosts",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "estimatedNumberOfTraditionalMediaPosts",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "estimatedNumberOfTraditionalImpressions",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfContractedOnSiteActivations",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "hasPersonalInNatureDeliverables",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "isContracted",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "isFree",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "hheac",
+				"type": "nvarchar"
+			},
+			{
+				"name": "submitter",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "fk_proposalId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hasParentContract",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "startDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "endDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "usesHandheld",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "isforInfluencers",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "includesBattlePosition",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "fk_McrcUnitId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "aitsBaselineId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FK_LOC_UNIT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "rmiFields",
+				"type": "nvarchar"
+			},
+			{
+				"name": "rmiQuestions",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FK_ASSIGNED_OWNER_LOC_UNIT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "assignedDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "dueDate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsEventContract"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

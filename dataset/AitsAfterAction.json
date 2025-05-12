@@ -1,0 +1,135 @@
+{
+	"name": "AitsAfterAction",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DEV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "problemsOrConcerns",
+				"type": "nvarchar"
+			},
+			{
+				"name": "description",
+				"type": "nvarchar"
+			},
+			{
+				"name": "deliverables",
+				"type": "nvarchar"
+			},
+			{
+				"name": "additionalDeliverables",
+				"type": "nvarchar"
+			},
+			{
+				"name": "personalInNatureDeliverables",
+				"type": "nvarchar"
+			},
+			{
+				"name": "numberOfAttendees",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfInfluencerContactsGenerated",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfLeadCardsSubmitted",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfLeadsThatInteractedWithMarines",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfOverallInteractions",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfSocialMediaImpressions",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfSocialMediaPosts",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfTraditionalMediaImpressions",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "numberOfTraditionalMediaPosts",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "objective",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ownerBilletGroup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "statusLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "subStatusLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "numberOfQualifiedLeadsGenerated",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "aitsBaselineId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "numberOfInfluencersThatInteractedWithMarines",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsafteraction"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

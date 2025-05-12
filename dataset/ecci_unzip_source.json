@@ -2,7 +2,7 @@
 	"name": "ecci_unzip_source",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_ABLB_ECCI",
+			"referenceName": "LS_ABLB_CMR",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],

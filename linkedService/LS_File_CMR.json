@@ -1,0 +1,13 @@
+{
+	"name": "LS_File_CMR",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureFileStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=vmlstdeveastus;EndpointSuffix=core.windows.net;",
+			"fileShare": "thom-fssmb-dev-cmr-eastus",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDJCOTc2RUVGLTg0RTQtNDM1OC05REU2LUMxMkNGRjZFMkRGNl85YjFmNWQyOC1hMDUzLTRkMzgtYjdkYy1iODFmNWRlNjNkN2EiDQp9"
+		}
+	}
+}

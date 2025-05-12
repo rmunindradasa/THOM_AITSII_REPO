@@ -1,0 +1,271 @@
+{
+	"name": "EventReport",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABLB_CMR",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EventReport.csv",
+				"folderPath": "file-aitsi-ems-etl-20250328.zip",
+				"container": "cmr"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"escapeChar": "\"",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "userId",
+				"type": "String"
+			},
+			{
+				"name": "eventId",
+				"type": "String"
+			},
+			{
+				"name": "approverId",
+				"type": "String"
+			},
+			{
+				"name": "approvalDue",
+				"type": "String"
+			},
+			{
+				"name": "status",
+				"type": "String"
+			},
+			{
+				"name": "subStatus",
+				"type": "String"
+			},
+			{
+				"name": "attendance",
+				"type": "String"
+			},
+			{
+				"name": "marinesAttendance",
+				"type": "String"
+			},
+			{
+				"name": "leadCards",
+				"type": "String"
+			},
+			{
+				"name": "attended",
+				"type": "String"
+			},
+			{
+				"name": "interviewsScheduled",
+				"type": "String"
+			},
+			{
+				"name": "recruiter",
+				"type": "String"
+			},
+			{
+				"name": "electricity",
+				"type": "String"
+			},
+			{
+				"name": "accommodating",
+				"type": "String"
+			},
+			{
+				"name": "recommend",
+				"type": "String"
+			},
+			{
+				"name": "emvAttend",
+				"type": "String"
+			},
+			{
+				"name": "recommendReason",
+				"type": "String"
+			},
+			{
+				"name": "deliverable",
+				"type": "String"
+			},
+			{
+				"name": "description",
+				"type": "String"
+			},
+			{
+				"name": "objective",
+				"type": "String"
+			},
+			{
+				"name": "behavior",
+				"type": "String"
+			},
+			{
+				"name": "awareness",
+				"type": "String"
+			},
+			{
+				"name": "engagements",
+				"type": "String"
+			},
+			{
+				"name": "mediaPosts",
+				"type": "String"
+			},
+			{
+				"name": "mediaImpressions",
+				"type": "String"
+			},
+			{
+				"name": "socialMediaPosts",
+				"type": "String"
+			},
+			{
+				"name": "socialMediaImpressions",
+				"type": "String"
+			},
+			{
+				"name": "qualifiedLeads",
+				"type": "String"
+			},
+			{
+				"name": "influencerContacts",
+				"type": "String"
+			},
+			{
+				"name": "followUps",
+				"type": "String"
+			},
+			{
+				"name": "interaction",
+				"type": "String"
+			},
+			{
+				"name": "influencerInteraction",
+				"type": "String"
+			},
+			{
+				"name": "onsiteActivations",
+				"type": "String"
+			},
+			{
+				"name": "targetMarketRating",
+				"type": "String"
+			},
+			{
+				"name": "targetMarketComments",
+				"type": "String"
+			},
+			{
+				"name": "estimatedAttendance",
+				"type": "String"
+			},
+			{
+				"name": "estimatedTargetAttendance",
+				"type": "String"
+			},
+			{
+				"name": "comingOfAgeRating",
+				"type": "String"
+			},
+			{
+				"name": "comingOfAgeComments",
+				"type": "String"
+			},
+			{
+				"name": "influentialRating",
+				"type": "String"
+			},
+			{
+				"name": "influentialComments",
+				"type": "String"
+			},
+			{
+				"name": "communityRelationsRating",
+				"type": "String"
+			},
+			{
+				"name": "communityRelationsComments",
+				"type": "String"
+			},
+			{
+				"name": "leadGenerationRating",
+				"type": "String"
+			},
+			{
+				"name": "leadGenerationComments",
+				"type": "String"
+			},
+			{
+				"name": "keyParticipants",
+				"type": "String"
+			},
+			{
+				"name": "problems",
+				"type": "String"
+			},
+			{
+				"name": "concerns",
+				"type": "String"
+			},
+			{
+				"name": "comments",
+				"type": "String"
+			},
+			{
+				"name": "approvedDistrictName",
+				"type": "String"
+			},
+			{
+				"name": "approvedRecruitingStationName",
+				"type": "String"
+			},
+			{
+				"name": "approvingUser",
+				"type": "String"
+			},
+			{
+				"name": "approvingBillet",
+				"type": "String"
+			},
+			{
+				"name": "approvingLocation",
+				"type": "String"
+			},
+			{
+				"name": "createdById",
+				"type": "String"
+			},
+			{
+				"name": "createdByUsername",
+				"type": "String"
+			},
+			{
+				"name": "updatedById",
+				"type": "String"
+			},
+			{
+				"name": "updatedByUsername",
+				"type": "String"
+			},
+			{
+				"name": "createdAt",
+				"type": "String"
+			},
+			{
+				"name": "updatedAt",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

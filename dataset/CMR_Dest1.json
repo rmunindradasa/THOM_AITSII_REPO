@@ -1,0 +1,18 @@
+{
+	"name": "CMR_Dest1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CMR_Dest1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "cmr"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
