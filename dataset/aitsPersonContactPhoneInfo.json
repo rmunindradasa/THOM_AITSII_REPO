@@ -1,0 +1,48 @@
+{
+	"name": "aitsPersonContactPhoneInfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "fk_personId",
+				"type": "nchar"
+			},
+			{
+				"name": "fk_contactPhoneInfoId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitspersoncontactphoneinfo"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

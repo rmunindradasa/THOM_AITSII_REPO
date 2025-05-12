@@ -1,0 +1,81 @@
+{
+	"name": "THOM_DataFlow_DEV_ECCI2MDML_EastUS_aitsInfluencerEventReference",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ecci_unzip_source",
+						"type": "DatasetReference"
+					},
+					"name": "ECCI"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "aitsInfluencerEventReference",
+						"type": "DatasetReference"
+					},
+					"name": "aitsInfluencerEventReference",
+					"description": "Export data to aitsInfluencerEventReference"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumns"
+				},
+				{
+					"name": "Upsert"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     parameter1 as string ('AzurePipeline')",
+				"}",
+				"source(output(",
+				"          InfluencerEventId as string,",
+				"          ApplicationId as string,",
+				"          EventId as string,",
+				"          IsActive as string,",
+				"          CreatedById as string,",
+				"          DateCreatedUTC as string,",
+				"          DateUpdatedUTC as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ECCI",
+				"ECCI derive(guid = uuid(),",
+				"          CreateDate = currentTimestamp(),",
+				"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
+				"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
+				"Upsert sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as string,",
+				"          fk_influencerId as string,",
+				"          fk_eventContract as string,",
+				"          createdBy as string,",
+				"          createdDateGmt as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['fk_influencerId'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id = guid,",
+				"          fk_influencerId = ApplicationId,",
+				"          fk_eventContract = InfluencerEventId,",
+				"          createdBy = CreatedBy,",
+				"          createdDateGmt = CreateDate",
+				"     )) ~> aitsInfluencerEventReference"
+			]
+		}
+	}
+}

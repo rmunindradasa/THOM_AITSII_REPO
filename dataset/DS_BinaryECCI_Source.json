@@ -1,0 +1,23 @@
+{
+	"name": "DS_BinaryECCI_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_FILE_ECCIS",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ECCI_Dataset"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation"
+			},
+			"compression": {
+				"type": "ZipDeflate"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

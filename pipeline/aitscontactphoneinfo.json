@@ -1,0 +1,37 @@
+{
+	"name": "aitscontactphoneinfo",
+	"properties": {
+		"activities": [
+			{
+				"name": "aitscontactphoneinfo",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "aitscontactphoneinfo",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "THOM-Pipe-DF-ECCI2MDML-EastUS"
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-02-28T22:12:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

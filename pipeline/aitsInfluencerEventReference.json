@@ -1,0 +1,37 @@
+{
+	"name": "aitsInfluencerEventReference",
+	"properties": {
+		"activities": [
+			{
+				"name": "aitsInfluencerEventReference",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "aitsInfluencerEventReference",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "THOM-Pipe-DF-ECCI2MDML-EastUS"
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-03-03T21:37:44Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

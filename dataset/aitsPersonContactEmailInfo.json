@@ -1,0 +1,50 @@
+{
+	"name": "aitsPersonContactEmailInfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "char"
+			},
+			{
+				"name": "fk_contactEmailInfoId",
+				"type": "varchar"
+			},
+			{
+				"name": "fk_personId",
+				"type": "char"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "createdBy",
+				"type": "varchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "updatedBy",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsPersonContactEmailInfo"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

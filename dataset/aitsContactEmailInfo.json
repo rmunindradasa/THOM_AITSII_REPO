@@ -1,0 +1,95 @@
+{
+	"name": "aitsContactEmailInfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "statusLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "statusReason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "typeLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "validationDate",
+				"type": "date"
+			},
+			{
+				"name": "optedOutDate",
+				"type": "date"
+			},
+			{
+				"name": "optedOut",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "isPrimary",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "isArchived",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "distributionCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "archivedDate",
+				"type": "date"
+			},
+			{
+				"name": "statusDate",
+				"type": "date"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "aitsBaselineId",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitscontactemailinfo"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

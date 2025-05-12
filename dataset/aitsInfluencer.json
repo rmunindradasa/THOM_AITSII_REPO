@@ -1,0 +1,185 @@
+{
+	"name": "aitsInfluencer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dev_sandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "char"
+			},
+			{
+				"name": "createdBy",
+				"type": "varchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "updatedBy",
+				"type": "varchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "hash",
+				"type": "varchar"
+			},
+			{
+				"name": "fk_personId",
+				"type": "varchar"
+			},
+			{
+				"name": "occupation",
+				"type": "varchar"
+			},
+			{
+				"name": "occupationOther",
+				"type": "varchar"
+			},
+			{
+				"name": "type",
+				"type": "varchar"
+			},
+			{
+				"name": "interests",
+				"type": "varchar"
+			},
+			{
+				"name": "interestsOtherValue",
+				"type": "varchar"
+			},
+			{
+				"name": "referallSource",
+				"type": "varchar"
+			},
+			{
+				"name": "referallSourceOther",
+				"type": "varchar"
+			},
+			{
+				"name": "relationToUsmc",
+				"type": "varchar"
+			},
+			{
+				"name": "relationToUsmcOther",
+				"type": "varchar"
+			},
+			{
+				"name": "collegeAttended",
+				"type": "varchar"
+			},
+			{
+				"name": "organizationAffiliations",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentAssignedBilletGroup",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentAssignmentMethod",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentAssignmentComments",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentSource",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentStatus",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentStatusReason",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentStatusDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "profileCompletedDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "firstEmailDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "fiveDayEmailDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "tenDayEmailDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "reassignmentCount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pendingArchiveEmailDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "fk_educationId",
+				"type": "char"
+			},
+			{
+				"name": "mostRecentAssignmentDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "homeTownCity",
+				"type": "varchar"
+			},
+			{
+				"name": "homeTownState",
+				"type": "varchar"
+			},
+			{
+				"name": "doNotContact",
+				"type": "bit"
+			},
+			{
+				"name": "aitsBaselineId",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsInfluencer"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

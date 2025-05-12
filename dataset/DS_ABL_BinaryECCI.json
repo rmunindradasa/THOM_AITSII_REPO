@@ -1,0 +1,55 @@
+{
+	"name": "DS_ABL_BinaryECCI",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_FILE_ECCIS",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ECCI_Dataset"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureFileStorageLocation"
+			},
+			"columnDelimiter": ",",
+			"compressionCodec": "ZipDeflate",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "InfluencerEventId",
+				"type": "String"
+			},
+			{
+				"name": "ApplicationId",
+				"type": "String"
+			},
+			{
+				"name": "EventId",
+				"type": "String"
+			},
+			{
+				"name": "IsActive",
+				"type": "String"
+			},
+			{
+				"name": "CreatedById",
+				"type": "String"
+			},
+			{
+				"name": "DateCreatedUTC",
+				"type": "String"
+			},
+			{
+				"name": "DateUpdatedUTC",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,67 @@
+{
+	"name": "ecci_unzip_source_1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABLB_ECCI",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "wk_AssignmentHistory_AITSII.csv",
+				"folderPath": "file-aitsi-ecci-etl-20250109.zip",
+				"container": "ecci"
+			},
+			"columnDelimiter": ",",
+			"compressionCodec": null,
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "Id",
+				"type": "String"
+			},
+			{
+				"name": "AppicationId",
+				"type": "String"
+			},
+			{
+				"name": "PersonId",
+				"type": "String"
+			},
+			{
+				"name": "AssignmentType",
+				"type": "String"
+			},
+			{
+				"name": "DistrictNumber",
+				"type": "String"
+			},
+			{
+				"name": "RecruitingStationNumber",
+				"type": "String"
+			},
+			{
+				"name": "RecruitingStationName",
+				"type": "String"
+			},
+			{
+				"name": "Aits1BaseLineId",
+				"type": "String"
+			},
+			{
+				"name": "DateCreatedUTC",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

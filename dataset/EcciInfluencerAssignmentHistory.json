@@ -1,0 +1,50 @@
+{
+	"name": "EcciInfluencerAssignmentHistory",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FK_INFLUENCER_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FK_LOC_UNIT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATED_ON",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "UPDATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UPDATED_ON",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ECCI_INFLUENCER_ASSIGNMENT_HISTORY"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

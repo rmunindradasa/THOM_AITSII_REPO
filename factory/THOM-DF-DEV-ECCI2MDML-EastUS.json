@@ -1,0 +1,15 @@
+{
+	"name": "THOM-DF-DEV-ECCI2MDML-EastUS",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned,UserAssigned",
+		"principalId": "94c43f43-72bf-450d-a0b8-a4ca09f7be09",
+		"tenantId": "b51e4e79-11b6-43de-90d8-5f073535f420",
+		"userAssignedIdentities": {
+			"/subscriptions/71c8d1a1-6097-48a4-90c9-b9fae74f4551/resourcegroups/WT-Data-Dev-RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/WT-Data-Dev-Managed-Identity-DF2SQL": {
+				"clientId": "bf4bb75c-c7b5-464b-82d0-49b46246bd2c",
+				"principalId": "30d5304a-bf64-4c4e-8e6e-ced97c1a680c"
+			}
+		}
+	}
+}

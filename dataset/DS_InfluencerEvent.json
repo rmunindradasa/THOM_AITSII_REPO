@@ -1,0 +1,57 @@
+{
+	"name": "DS_InfluencerEvent",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABLB_ECCI_V",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ECCI_Dataset"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "InfluencerEvent.csv",
+				"folderPath": "file-aitsi-ecci-etl-20250109.zip",
+				"container": "ecci"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "InfluencerEventId",
+				"type": "String"
+			},
+			{
+				"name": "ApplicationId",
+				"type": "String"
+			},
+			{
+				"name": "EventId",
+				"type": "String"
+			},
+			{
+				"name": "IsActive",
+				"type": "String"
+			},
+			{
+				"name": "CreatedById",
+				"type": "String"
+			},
+			{
+				"name": "DateCreatedUTC",
+				"type": "String"
+			},
+			{
+				"name": "DateUpdatedUTC",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

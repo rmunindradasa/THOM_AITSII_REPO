@@ -1,0 +1,29 @@
+{
+	"name": "ECCI_Zip_Files",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABLB_ECCI",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "ecci"
+			},
+			"columnDelimiter": ",",
+			"compressionCodec": null,
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000ٛxX/��G\bP\f\u0000R�\u001e\u0000 \u0000\u0000\u0000File-AITS1-ECCI-DEV-20240324.csv��[s�H�&�~\"�����\u0011�+��\u0017%\u0012��*I�H���~�HX�M�\u001a^�VU�?�J�\u0014AR��{\u000egw�E\u0002$2s�Z߷r]������p�\u0013��J*�\u00171�9c\\\u0017E�\u000b���F��",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

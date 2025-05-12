@@ -1,0 +1,123 @@
+{
+	"name": "aitsAddressInfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "addressLine1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "addressLine2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "addressLine3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "archivedDate",
+				"type": "date"
+			},
+			{
+				"name": "city",
+				"type": "nvarchar"
+			},
+			{
+				"name": "county",
+				"type": "nvarchar"
+			},
+			{
+				"name": "isArchived",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "isPrimary",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "latitude",
+				"type": "nvarchar"
+			},
+			{
+				"name": "longitude",
+				"type": "nvarchar"
+			},
+			{
+				"name": "optedOut",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "optedOutDate",
+				"type": "date"
+			},
+			{
+				"name": "stateLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "statusLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "statusDate",
+				"type": "date"
+			},
+			{
+				"name": "statusReason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "typeLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zipCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zipRoute",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGMT",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGMT",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "aitsBaselineId",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsaddressinfo"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

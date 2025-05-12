@@ -1,0 +1,18 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/jjtest/blobs/file-aitsi-fluidforms-etl",
+			"blobPathEndsWith": "zip",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/71c8d1a1-6097-48a4-90c9-b9fae74f4551/resourceGroups/WTRG/providers/Microsoft.Storage/storageAccounts/usmcdevfiles",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

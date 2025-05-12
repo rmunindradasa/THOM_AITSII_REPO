@@ -1,0 +1,68 @@
+{
+	"name": "loc_mcrc_unit",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NAME_FULL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NAME_SHORT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FK_TYPE_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FK_PARENT_UNIT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATED_DATE_TIME",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "UPDATED_BY",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UPDATED_DATE_TIME",
+				"type": "datetime2",
+				"scale": 6
+			},
+			{
+				"name": "AITS_BASELINE_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "APPIAN_GROUP_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IS_ACTIVE",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "loc_mcrc_unit"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

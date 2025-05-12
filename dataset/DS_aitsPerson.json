@@ -1,0 +1,128 @@
+{
+	"name": "DS_aitsPerson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ECCI_Dataset"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "mcrissEthnicCategory",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mcrissGender",
+				"type": "nvarchar"
+			},
+			{
+				"name": "genderIsInferred",
+				"type": "bit"
+			},
+			{
+				"name": "mcrissRace",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mcrisRaceOtherDetail",
+				"type": "nvarchar"
+			},
+			{
+				"name": "age",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "yearOfBirth",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "monthOfBirth",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "namePrefix",
+				"type": "nvarchar"
+			},
+			{
+				"name": "firstName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "lastName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "middleName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "nameSuffix",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentFulfillmentItem",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentAttributedPromotion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentAssignment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mcrissId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mcrissAcceptance",
+				"type": "nvarchar"
+			},
+			{
+				"name": "environmentOfRecord",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "fk_locMcrcSchoolId",
+				"type": "nchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsPerson"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

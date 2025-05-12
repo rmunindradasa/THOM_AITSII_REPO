@@ -1,0 +1,187 @@
+{
+	"name": "DS_aitsinfluencer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ECCI_Dataset"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "hash",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fk_personId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "occupation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "occupationOther",
+				"type": "nvarchar"
+			},
+			{
+				"name": "type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "interests",
+				"type": "nvarchar"
+			},
+			{
+				"name": "interestsOtherValue",
+				"type": "nvarchar"
+			},
+			{
+				"name": "referallSource",
+				"type": "nvarchar"
+			},
+			{
+				"name": "referallSourceOther",
+				"type": "nvarchar"
+			},
+			{
+				"name": "relationToUsmc",
+				"type": "nvarchar"
+			},
+			{
+				"name": "relationToUsmcOther",
+				"type": "nvarchar"
+			},
+			{
+				"name": "collegeAttended",
+				"type": "nvarchar"
+			},
+			{
+				"name": "organizationAffiliations",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentAssignedBilletGroup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentAssignmentMethod",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentAssignmentComments",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentSource",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentStatusReason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mostRecentStatusDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "profileCompletedDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "firstEmailDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "fiveDayEmailDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "tenDayEmailDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "reassignmentCount",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pendingArchiveEmailDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "fk_educationId",
+				"type": "nchar"
+			},
+			{
+				"name": "mostRecentAssignmentDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "homeTownCity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "homeTownState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "doNotContact",
+				"type": "bit"
+			},
+			{
+				"name": "aitsBaselineId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FK_LOC_UNIT_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RANK",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsinfluencer"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

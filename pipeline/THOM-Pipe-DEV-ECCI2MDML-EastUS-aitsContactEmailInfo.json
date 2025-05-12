@@ -1,0 +1,37 @@
+{
+	"name": "THOM-Pipe-DEV-ECCI2MDML-EastUS-aitsContactEmailInfo",
+	"properties": {
+		"activities": [
+			{
+				"name": "aitsContactEmailInfo",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "THOM_DataFlow_DEV_ECCI2MDML_EastUS_aitsContactEmailInfo",
+						"type": "DataFlowReference",
+						"parameters": {
+							"parameter1": "'AzurePipeline'"
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-02-19T22:50:41Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

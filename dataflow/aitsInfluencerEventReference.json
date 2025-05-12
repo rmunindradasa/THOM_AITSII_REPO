@@ -1,0 +1,116 @@
+{
+	"name": "aitsInfluencerEventReference",
+	"properties": {
+		"folder": {
+			"name": "ECCI_DataFlow"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_InfluencerEvent",
+						"type": "DatasetReference"
+					},
+					"name": "aitscontactphoneinfo1"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_aitsInfluencerEventReference",
+						"type": "DatasetReference"
+					},
+					"name": "aitsinfluncereventreference"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_aitsInfluencerEventReference",
+						"type": "DatasetReference"
+					},
+					"name": "aitscontactemailinfon"
+				}
+			],
+			"transformations": [
+				{
+					"name": "GUID"
+				},
+				{
+					"name": "IDLK"
+				},
+				{
+					"name": "DateLK"
+				},
+				{
+					"name": "DrivedDate"
+				},
+				{
+					"name": "Upsert"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          InfluencerEventId as string,",
+				"          ApplicationId as string,",
+				"          EventId as string,",
+				"          IsActive as string,",
+				"          CreatedById as string,",
+				"          DateCreatedUTC as string,",
+				"          DateUpdatedUTC as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> aitscontactphoneinfo1",
+				"source(output(",
+				"          id as string,",
+				"          fk_influencerId as string,",
+				"          fk_eventContract as string,",
+				"          createdBy as string,",
+				"          createdDateGmt as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> aitsinfluncereventreference",
+				"aitscontactphoneinfo1 derive(GUID = uuid()) ~> GUID",
+				"GUID, aitsinfluncereventreference exists(GUID == id,",
+				"     negate:true,",
+				"     broadcast: 'both')~> IDLK",
+				"IDLK, aitsinfluncereventreference lookup(InfluencerEventId == fk_influencerId,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> DateLK",
+				"DateLK derive(createdBy = iif(isNull(createdBy),'Thom-Dev',createdBy),",
+				"          createdDateGMT = iif(isNull(createdDateGmt),currentTimestamp(),createdDateGmt),",
+				"          updatedBy = 'Thom-Dev',",
+				"          updatedDateGMT = currentTimestamp()) ~> DrivedDate",
+				"DrivedDate alterRow(upsertIf(true())) ~> Upsert",
+				"Upsert sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as string,",
+				"          fk_influencerId as string,",
+				"          fk_eventContract as string,",
+				"          createdBy as string,",
+				"          createdDateGmt as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['fk_influencerId'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id = GUID,",
+				"          fk_influencerId = EventId,",
+				"          fk_eventContract,",
+				"          createdBy,",
+				"          createdDateGmt = DrivedDate@createdDateGMT",
+				"     )) ~> aitscontactemailinfon"
+			]
+		}
+	}
+}

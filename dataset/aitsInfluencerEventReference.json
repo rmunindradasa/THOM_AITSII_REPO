@@ -1,0 +1,40 @@
+{
+	"name": "aitsInfluencerEventReference",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "fk_influencerId",
+				"type": "nchar"
+			},
+			{
+				"name": "fk_eventContract",
+				"type": "nchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsInfluencerEventReference"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

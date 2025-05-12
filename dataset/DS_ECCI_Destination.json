@@ -1,0 +1,21 @@
+{
+	"name": "DS_ECCI_Destination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABLB_ECCI_V",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "ECCI_Dataset"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "ecci"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

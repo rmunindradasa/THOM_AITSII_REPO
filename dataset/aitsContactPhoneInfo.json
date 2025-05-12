@@ -1,0 +1,87 @@
+{
+	"name": "aitsContactPhoneInfo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "archivedDate",
+				"type": "date"
+			},
+			{
+				"name": "countryCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "extension",
+				"type": "nvarchar"
+			},
+			{
+				"name": "isArchived",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "isPrimary",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "optedOut",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "optedOutDate",
+				"type": "date"
+			},
+			{
+				"name": "typeLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "validationDate",
+				"type": "date"
+			},
+			{
+				"name": "number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "aitsBaselineId",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitscontactphoneinfo"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

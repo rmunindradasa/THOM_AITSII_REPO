@@ -1,0 +1,179 @@
+{
+	"name": "THOM_DataFlow_DEV_ECCI2MDML_EastUS_EcciInfluencerAssignmentHistory",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ecci_unzip_source_1",
+						"type": "DatasetReference"
+					},
+					"name": "ECCI"
+				},
+				{
+					"dataset": {
+						"referenceName": "loc_mcrc_unit",
+						"type": "DatasetReference"
+					},
+					"name": "LocMcrcUnit"
+				},
+				{
+					"dataset": {
+						"referenceName": "aits_Influencer",
+						"type": "DatasetReference"
+					},
+					"name": "AitsInfluencer"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "EcciInfluencerAssignmentHistory",
+						"type": "DatasetReference"
+					},
+					"name": "EcciInfluencerAssignmentHistory",
+					"description": "Export data to aitsInfluencerEventReference"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumns"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "Upsert"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     parameter1 as string ('AzurePipeline')",
+				"}",
+				"source(output(",
+				"          id as string,",
+				"          Id as string,",
+				"          AppicationId as string,",
+				"          PersonId as string,",
+				"          AssignmentType as string,",
+				"          DistrictNumber as string,",
+				"          RecruitingStationNumber as string,",
+				"          RecruitingStationName as string,",
+				"          Aits1BaseLineId as string,",
+				"          DateCreatedUTC as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> ECCI",
+				"source(output(",
+				"          ID as string,",
+				"          NAME_FULL as string,",
+				"          NAME_SHORT as string,",
+				"          FK_TYPE_ID as string,",
+				"          FK_PARENT_UNIT_ID as string,",
+				"          CREATED_BY as string,",
+				"          CREATED_DATE_TIME as timestamp,",
+				"          UPDATED_BY as string,",
+				"          UPDATED_DATE_TIME as timestamp,",
+				"          AITS_BASELINE_ID as string,",
+				"          APPIAN_GROUP_ID as string,",
+				"          IS_ACTIVE as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> LocMcrcUnit",
+				"source(output(",
+				"          id as string,",
+				"          createdBy as string,",
+				"          createdDateGmt as timestamp,",
+				"          updatedBy as string,",
+				"          updatedDateGmt as timestamp,",
+				"          hash as string,",
+				"          fk_personId as string,",
+				"          occupation as string,",
+				"          occupationOther as string,",
+				"          type as string,",
+				"          interests as string,",
+				"          interestsOtherValue as string,",
+				"          referallSource as string,",
+				"          referallSourceOther as string,",
+				"          relationToUsmc as string,",
+				"          relationToUsmcOther as string,",
+				"          collegeAttended as string,",
+				"          organizationAffiliations as string,",
+				"          mostRecentAssignedBilletGroup as string,",
+				"          mostRecentAssignmentMethod as string,",
+				"          mostRecentAssignmentComments as string,",
+				"          mostRecentSource as string,",
+				"          mostRecentStatus as string,",
+				"          mostRecentStatusReason as string,",
+				"          mostRecentStatusDateGmt as timestamp,",
+				"          profileCompletedDateGmt as timestamp,",
+				"          firstEmailDateGmt as timestamp,",
+				"          fiveDayEmailDateGmt as timestamp,",
+				"          tenDayEmailDateGmt as timestamp,",
+				"          reassignmentCount as integer,",
+				"          pendingArchiveEmailDateGmt as timestamp,",
+				"          fk_educationId as string,",
+				"          mostRecentAssignmentDateGmt as timestamp,",
+				"          homeTownCity as string,",
+				"          homeTownState as string,",
+				"          doNotContact as boolean,",
+				"          aitsBaselineId as string,",
+				"          FK_LOC_UNIT_ID as string,",
+				"          RANK as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> AitsInfluencer",
+				"join2 derive(guid = uuid(),",
+				"          CreateDate = currentTimestamp(),",
+				"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
+				"ECCI, LocMcrcUnit join(Aits1BaseLineId == AITS_BASELINE_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1, AitsInfluencer join(PersonId == aitsBaselineId,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
+				"Upsert sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ID as string,",
+				"          FK_INFLUENCER_ID as string,",
+				"          FK_LOC_UNIT_ID as string,",
+				"          CREATED_BY as string,",
+				"          CREATED_ON as timestamp,",
+				"          UPDATED_BY as string,",
+				"          UPDATED_ON as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['ID'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          ID = ECCI@id,",
+				"          FK_INFLUENCER_ID = aitsBaselineId,",
+				"          FK_LOC_UNIT_ID = AITS_BASELINE_ID,",
+				"          CREATED_BY = CreatedBy,",
+				"          CREATED_ON = CreateDate",
+				"     )) ~> EcciInfluencerAssignmentHistory"
+			]
+		}
+	}
+}

@@ -1,0 +1,198 @@
+{
+	"name": "aitsPersonContactEmailInfo",
+	"properties": {
+		"folder": {
+			"name": "ECCI_DataFlow"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_wk_ContainerData_Flattened",
+						"type": "DatasetReference"
+					},
+					"name": "aitsPersonContactEmailInfo"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_aitsPersonContactEmailInfo",
+						"type": "DatasetReference"
+					},
+					"name": "aitscontactphoneinfo"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_aitsPersonContactEmailInfo",
+						"type": "DatasetReference"
+					},
+					"name": "aitscontactemailinfon"
+				}
+			],
+			"transformations": [
+				{
+					"name": "GUID"
+				},
+				{
+					"name": "IDLK"
+				},
+				{
+					"name": "DateLK"
+				},
+				{
+					"name": "DrivedDate"
+				},
+				{
+					"name": "Upsert"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          PersonId as string,",
+				"          ContainerId as string,",
+				"          Address_Apt_Unit as string,",
+				"          Address_City as string,",
+				"          Address_State as string,",
+				"          Address_Street as string,",
+				"          Address_Zip as string,",
+				"          Advanced_Course_Name as string,",
+				"          Advanced_Course_Type as string,",
+				"          Advanced_Courses_Taken as string,",
+				"          Awards_Selector as string,",
+				"          College as string,",
+				"          Date_Attended as string,",
+				"          Date_of_Birth_Month as string,",
+				"          Date_of_Birth_Year as string,",
+				"          Disciplinary_Issues as string,",
+				"          Do_Not_Contact as string,",
+				"          Email as string,",
+				"          Email_list_opt_out as string,",
+				"          Ethnicity as string,",
+				"          Event_Attendance as string,",
+				"          Event_Attendance_Describe as string,",
+				"          Event_City as string,",
+				"          Event_State as string,",
+				"          Extracurricular_Activities as string,",
+				"          Extracurricular_Activities_Years as string,",
+				"          Extracurricular_Selector as string,",
+				"          First_Name as string,",
+				"          Gender as string,",
+				"          GPA_Scale as string,",
+				"          Grade_Level_Junior as string,",
+				"          Grade_Level_Junior_or_Sophomore as string,",
+				"          Graduation_Year as string,",
+				"          Homeschooled as string,",
+				"          Hometown_City as string,",
+				"          Hometown_State as string,",
+				"          Honors_Awards as string,",
+				"          Influencer_Opt_In as string,",
+				"          Interests as string,",
+				"          JROTC_Branch as string,",
+				"          JROTC_Selector as string,",
+				"          Last_Name as string,",
+				"          Leadership_Selector as string,",
+				"          Leadership_Years as string,",
+				"          Legal_Infraction as string,",
+				"          Legal_Resident as string,",
+				"          Letter_of_Recommendation_1 as string,",
+				"          Marines_Opt_In as string,",
+				"          Nominee as string,",
+				"          Nominee_Relationship as string,",
+				"          Occupation as string,",
+				"          Other_Courses as string,",
+				"          Other_Interests as string,",
+				"          Other_Marines_Relationship_Type as string,",
+				"          Other_Nominee_Relationship as string,",
+				"          Other_Occuptation as string,",
+				"          Other_Sports as string,",
+				"          Phone_Number as string,",
+				"          Poolee_Academy_NROTC as string,",
+				"          Poolee_Academy_NROTC_Delayed_Entry_Program as string,",
+				"          Referral as string,",
+				"          Referral_Other as string,",
+				"          Relationship_to_Marines as string,",
+				"          School_Name as string,",
+				"          School_Community_Leadership as string,",
+				"          SIPRM_Username as string,",
+				"          SLCDA_Referral as string,",
+				"          Source as string,",
+				"          Sports_JV_Varsity as string,",
+				"          Sports_Played as string,",
+				"          Sports_Selector as string,",
+				"          Sports_Years_Played as string,",
+				"          Team_Captain as string,",
+				"          Team_Captain_Describe as string,",
+				"          Visible_Tattoos as string,",
+				"          Volunteer_Hours_Week as string,",
+				"          Volunteer_Selector as string,",
+				"          Volunteer_Work as string,",
+				"          Work_Experience as string,",
+				"          Work_Selector as string,",
+				"          Work_Years as string,",
+				"          DateCreatedUTC as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> aitsPersonContactEmailInfo",
+				"source(output(",
+				"          id as string,",
+				"          fk_contactEmailInfoId as string,",
+				"          fk_personId as string,",
+				"          createdDateGmt as timestamp,",
+				"          createdBy as string,",
+				"          updatedDateGmt as timestamp,",
+				"          updatedBy as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> aitscontactphoneinfo",
+				"aitsPersonContactEmailInfo derive(GUID = uuid()) ~> GUID",
+				"GUID, aitscontactphoneinfo exists(GUID == id,",
+				"     negate:true,",
+				"     broadcast: 'both')~> IDLK",
+				"IDLK, aitscontactphoneinfo lookup(PersonId == fk_personId,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> DateLK",
+				"DateLK derive(createdBy = iif(isNull(createdBy),'Thom-Dev',createdBy),",
+				"          createdDateGMT = iif(isNull(createdDateGmt),currentTimestamp(),createdDateGmt),",
+				"          updatedBy = 'Thom-Dev',",
+				"          updatedDateGMT = currentTimestamp()) ~> DrivedDate",
+				"DrivedDate alterRow(upsertIf(true())) ~> Upsert",
+				"Upsert sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as string,",
+				"          fk_contactEmailInfoId as string,",
+				"          fk_personId as string,",
+				"          createdDateGmt as timestamp,",
+				"          createdBy as string,",
+				"          updatedDateGmt as timestamp,",
+				"          updatedBy as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['id'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          id = GUID,",
+				"          fk_personId = PersonId,",
+				"          createdDateGmt = aitscontactphoneinfo@createdDateGmt,",
+				"          createdBy,",
+				"          updatedDateGmt = aitscontactphoneinfo@updatedDateGmt,",
+				"          updatedBy,",
+				"          each(match(/* All input columns */true()),",
+				"               /* Input name */$$ = $$)",
+				"     )) ~> aitscontactemailinfon"
+			]
+		}
+	}
+}

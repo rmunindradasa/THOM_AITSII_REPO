@@ -1,0 +1,37 @@
+{
+	"name": "THOM-Pipe-DEV-ECCI2MDML-EastUS-aitsAddressInfo",
+	"properties": {
+		"activities": [
+			{
+				"name": "aitsAddressInfo",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "THOM_DataFlow_DEV_ECCI2MDML_EastUS_aitsAddressInfo",
+						"type": "DataFlowReference",
+						"parameters": {
+							"parameter1": "'AzurePipeline'"
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-09-11T20:36:19Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

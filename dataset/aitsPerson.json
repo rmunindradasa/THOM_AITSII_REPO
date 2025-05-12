@@ -1,0 +1,121 @@
+{
+	"name": "aitsPerson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dev_sandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "char"
+			},
+			{
+				"name": "mcrissEthnicCategory",
+				"type": "varchar"
+			},
+			{
+				"name": "mcrissGender",
+				"type": "varchar"
+			},
+			{
+				"name": "genderIsInferred",
+				"type": "bit"
+			},
+			{
+				"name": "mcrissRace",
+				"type": "varchar"
+			},
+			{
+				"name": "mcrisRaceOtherDetail",
+				"type": "varchar"
+			},
+			{
+				"name": "age",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "yearOfBirth",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "monthOfBirth",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "namePrefix",
+				"type": "varchar"
+			},
+			{
+				"name": "firstName",
+				"type": "varchar"
+			},
+			{
+				"name": "lastName",
+				"type": "varchar"
+			},
+			{
+				"name": "middleName",
+				"type": "varchar"
+			},
+			{
+				"name": "nameSuffix",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentFulfillmentItem",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentAttributedPromotion",
+				"type": "varchar"
+			},
+			{
+				"name": "mostRecentAssignment",
+				"type": "varchar"
+			},
+			{
+				"name": "mcrissId",
+				"type": "varchar"
+			},
+			{
+				"name": "mcrissAcceptance",
+				"type": "varchar"
+			},
+			{
+				"name": "environmentOfRecord",
+				"type": "varchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "varchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "updatedBy",
+				"type": "varchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsPerson"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
