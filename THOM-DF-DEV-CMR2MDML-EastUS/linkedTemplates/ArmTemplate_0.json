@@ -1,0 +1,1073 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "THOM-DF-DEV-CMR2MDML-EastUS"
+		},
+		"AzureBlobStorage11_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage11'"
+		},
+		"AzureFileStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureFileStorage1'"
+		},
+		"CMR_Dest1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CMR_Dest1'"
+		},
+		"LS_ABLB_CMR_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABLB_CMR'"
+		},
+		"LS_ABLB_ECCI_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABLB_ECCI'"
+		},
+		"LS_ABLB_ECCIV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABLB_ECCIV'"
+		},
+		"LS_ABLB_ECCI_V_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABLB_ECCI_V'"
+		},
+		"LS_FILE_ECCI_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_FILE_ECCI'"
+		},
+		"LS_FILE_ECCIS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_FILE_ECCIS'"
+		},
+		"LS_File_CMR_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_File_CMR'"
+		},
+		"LS_File_CMR1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_File_CMR1'"
+		},
+		"LS_Fileshare_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_Fileshare'"
+		},
+		"LS_SQL_MDML_DMSandbox_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQL_MDML_DMSandbox'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=usmcdevdb.database.windows.net;Initial Catalog=MDML_DMSandbox"
+		},
+		"VML_BLOB_DEV_MDML_EastUS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'VML_BLOB_DEV_MDML_EastUS'"
+		},
+		"dev_sandbox_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'dev_sandbox'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=usmcdevdb.database.windows.net;Initial Catalog=MDML_DMSandbox"
+		},
+		"LS_SQL_MDML_DEV_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuresql-etl20240819.database.windows.net"
+		},
+		"LS_SQL_MDML_DEV_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "THOM-DB-DEV-MDML-EastUS"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/71c8d1a1-6097-48a4-90c9-b9fae74f4551/resourceGroups/WTRG/providers/Microsoft.Storage/storageAccounts/usmcdevfiles"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage11')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage11_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureFileStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureFileStorage1_connectionString')]",
+					"fileShare": "devfiles"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CMR_Dest1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('CMR_Dest1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ABLB_CMR')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_ABLB_CMR_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ABLB_ECCI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_ABLB_ECCI_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ABLB_ECCIV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_ABLB_ECCIV_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_ABLB_ECCI_V')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_ABLB_ECCI_V_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_FILE_ECCI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_FILE_ECCI_connectionString')]",
+					"fileShare": "thom-fssmb-qa-ecci-eastus"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_FILE_ECCIS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_FILE_ECCIS_connectionString')]",
+					"fileShare": "thom-fssmb-dev-ecci-eastus"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_File_CMR')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_File_CMR_connectionString')]",
+					"fileShare": "thom-fssmb-dev-cmr-eastus"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_File_CMR1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFileStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_File_CMR1_connectionString')]",
+					"fileShare": "thom-fssmb-dev-cmr-eastus"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_Fileshare')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_Fileshare_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_SQL_MDML_DEV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('LS_SQL_MDML_DEV_properties_typeProperties_server')]",
+					"database": "[parameters('LS_SQL_MDML_DEV_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SystemAssignedManagedIdentity"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_SQL_MDML_DMSandbox')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('LS_SQL_MDML_DMSandbox_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/VML_BLOB_DEV_MDML_EastUS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('VML_BLOB_DEV_MDML_EastUS_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dev_sandbox')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('dev_sandbox_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/jjtest/blobs/file-aitsi-fluidforms-etl",
+					"blobPathEndsWith": "zip",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AitsAfterAction')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DEV",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "problemsOrConcerns",
+						"type": "nvarchar"
+					},
+					{
+						"name": "description",
+						"type": "nvarchar"
+					},
+					{
+						"name": "deliverables",
+						"type": "nvarchar"
+					},
+					{
+						"name": "additionalDeliverables",
+						"type": "nvarchar"
+					},
+					{
+						"name": "personalInNatureDeliverables",
+						"type": "nvarchar"
+					},
+					{
+						"name": "numberOfAttendees",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfInfluencerContactsGenerated",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfLeadCardsSubmitted",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfLeadsThatInteractedWithMarines",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfOverallInteractions",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfSocialMediaImpressions",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfSocialMediaPosts",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfTraditionalMediaImpressions",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfTraditionalMediaPosts",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "objective",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ownerBilletGroup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "subStatusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "numberOfQualifiedLeadsGenerated",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "numberOfInfluencersThatInteractedWithMarines",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsafteraction"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_SQL_MDML_DEV')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AitsEventContract')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nvarchar"
+					},
+					{
+						"name": "name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "systemGeneratedName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "selfReportedOtherCategory",
+						"type": "nvarchar"
+					},
+					{
+						"name": "purpose",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EVENT_TYPE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cost",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "LOCATION_NAME",
+						"type": "nvarchar"
+					},
+					{
+						"name": "STREET_ADDRESS1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "STREET_ADDRESS2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "city",
+						"type": "nvarchar"
+					},
+					{
+						"name": "stateLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zipCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_fiscalYearId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_afteractionId",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_fundingMcrcUnitId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "fk_purchaseRequestId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_parentEventContractId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_proposalFileId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_promotionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "assignedOwner",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "subStatusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "dateContractSigned",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "deliverables",
+						"type": "nvarchar"
+					},
+					{
+						"name": "additionalDeliverables",
+						"type": "nvarchar"
+					},
+					{
+						"name": "personalInNatureDeliverables",
+						"type": "nvarchar"
+					},
+					{
+						"name": "estimatedAttendence",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "estimatedNumberOfInfluencerContacts",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "estimatedNumberOfLeads",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "estimatedNumberOfOverallInteractions",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "estimatedNumberOfSocialMediaImpressions",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "estimatedNumberOfSocialMediaPosts",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "estimatedNumberOfTraditionalMediaPosts",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "estimatedNumberOfTraditionalImpressions",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "numberOfContractedOnSiteActivations",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "hasPersonalInNatureDeliverables",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "isContracted",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "isFree",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "hheac",
+						"type": "nvarchar"
+					},
+					{
+						"name": "submitter",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "fk_proposalId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "hasParentContract",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "startDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "endDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "usesHandheld",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "isforInfluencers",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "includesBattlePosition",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "fk_McrcUnitId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FK_LOC_UNIT_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "rmiFields",
+						"type": "nvarchar"
+					},
+					{
+						"name": "rmiQuestions",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FK_ASSIGNED_OWNER_LOC_UNIT_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "assignedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "dueDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsEventContract"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_SQL_MDML_DMSandbox')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CMR_Dest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_CMR",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Event.csv",
+						"folderPath": "file-aitsi-ems-etl-20250328.zip",
+						"container": "cmr"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\"",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "id",
+						"type": "String"
+					},
+					{
+						"name": "parentId",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "cost",
+						"type": "String"
+					},
+					{
+						"name": "dateContractedSigned",
+						"type": "String"
+					},
+					{
+						"name": "eacCode",
+						"type": "String"
+					},
+					{
+						"name": "approverId",
+						"type": "String"
+					},
+					{
+						"name": "approvalDue",
+						"type": "String"
+					},
+					{
+						"name": "regionCode",
+						"type": "String"
+					},
+					{
+						"name": "districtCode",
+						"type": "String"
+					},
+					{
+						"name": "recruitingStationCode",
+						"type": "String"
+					},
+					{
+						"name": "recruitingSubStationCode",
+						"type": "String"
+					},
+					{
+						"name": "ossCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingRegionCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingDistrictCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingRecruitingStationCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingRecruitingSubStationCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingOssCode",
+						"type": "String"
+					},
+					{
+						"name": "qualifiedName",
+						"type": "String"
+					},
+					{
+						"name": "sourceCode",
+						"type": "String"
+					},
+					{
+						"name": "fiscalYear",
+						"type": "String"
+					},
+					{
+						"name": "city",
+						"type": "String"
+					},
+					{
+						"name": "state",
+						"type": "String"
+					},
+					{
+						"name": "startDate",
+						"type": "String"
+					},
+					{
+						"name": "endDate",
+						"type": "String"
+					},
+					{
+						"name": "customCategory",
+						"type": "String"
+					},
+					{
+						"name": "type",
+						"type": "String"
+					},
+					{
+						"name": "status",
+						"type": "String"
+					},
+					{
+						"name": "subStatus",
+						"type": "String"
+					},
+					{
+						"name": "isFromPr",
+						"type": "String"
+					},
+					{
+						"name": "isFromEac",
+						"type": "String"
+					},
+					{
+						"name": "contract",
+						"type": "String"
+					},
+					{
+						"name": "schoolName",
+						"type": "String"
+					},
+					{
+						"name": "raoUsername",
+						"type": "String"
+					},
+					{
+						"name": "rejectComments",
+						"type": "String"
+					},
+					{
+						"name": "approvedDistrictName",
+						"type": "String"
+					},
+					{
+						"name": "approvedRecruitingStationName",
+						"type": "String"
+					},
+					{
+						"name": "approvedRecruitingSubStationName",
+						"type": "String"
+					},
+					{
+						"name": "approvingUser",
+						"type": "String"
+					},
+					{
+						"name": "approvingBillet",
+						"type": "String"
+					},
+					{
+						"name": "approvingLocation",
+						"type": "String"
+					},
+					{
+						"name": "purpose",
+						"type": "String"
+					},
+					{
+						"name": "estAttendance",
+						"type": "String"
+					},
+					{
+						"name": "behavior",
+						"type": "String"
+					},
+					{
+						"name": "awareness",
+						"type": "String"
+					},
+					{
+						"name": "estEngagements",
+						"type": "String"
+					},
+					{
+						"name": "estMediaPosts",
+						"type": "String"
+					},
+					{
+						"name": "estMediaImpressions",
+						"type": "String"
+					},
+					{
+						"name": "estSocialMediaPosts",
+						"type": "String"
+					},
+					{
+						"name": "estSocialMediaImpressions",
+						"type": "String"
+					},
+					{
+						"name": "estQualifiedLeads",
+						"type": "String"
+					},
+					{
+						"name": "estInfluencerContacts",
+						"type": "String"
+					},
+					{
+						"name": "estFollowUps",
+						"type": "String"
+					},
+					{
+						"name": "estInteraction",
+						"type": "String"
+					},
+					{
+						"name": "estInfluencerInteraction",
+						"type": "String"
+					},
+					{
+						"name": "estOnsiteActivations",
+						"type": "String"
+					},
+					{
+						"name": "deliverable",
+						"type": "String"
+					},
+					{
+						"name": "addlDeliverables",
+						"type": "String"
+					},
+					{
+						"name": "recommend",
+						"type": "String"
+					},
+					{
+						"name": "emvAttend",
+						"type": "String"
+					},
+					{
+						"name": "recommendReason",
+						"type": "String"
+					},
+					{
+						"name": "assignedBy",
+						"type": "String"
+					},
+					{
+						"name": "oldCategory",
+						"type": "String"
+					},
+					{
+						"name": "oldEventId",
+						"type": "String"
+					},
+					{
+						"name": "createdById",
+						"type": "String"
+					},
+					{
+						"name": "createdByUsername",
+						"type": "String"
+					},
+					{
+						"name": "updatedById",
+						"type": "String"
+					},
+					{
+						"name": "updatedByUsername",
+						"type": "String"
+					},
+					{
+						"name": "createdAt",
+						"type": "String"
+					},
+					{
+						"name": "updatedAt",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_ABLB_CMR')]"
+			]
+		}
+	]
+}

@@ -1,0 +1,2548 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "THOM-DF-DEV-CMR2MDML-EastUS"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/aitsContactEmailInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "address",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "typeLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "validationDate",
+						"type": "date"
+					},
+					{
+						"name": "optedOutDate",
+						"type": "date"
+					},
+					{
+						"name": "optedOut",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isPrimary",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isArchived",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "distributionCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "archivedDate",
+						"type": "date"
+					},
+					{
+						"name": "statusDate",
+						"type": "date"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitscontactemailinfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aitsContactPhoneInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "archivedDate",
+						"type": "date"
+					},
+					{
+						"name": "countryCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "extension",
+						"type": "nvarchar"
+					},
+					{
+						"name": "isArchived",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isPrimary",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "optedOut",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "optedOutDate",
+						"type": "date"
+					},
+					{
+						"name": "typeLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "validationDate",
+						"type": "date"
+					},
+					{
+						"name": "number",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitscontactphoneinfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aitsInfluencer')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dev_sandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "char"
+					},
+					{
+						"name": "createdBy",
+						"type": "varchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "updatedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "hash",
+						"type": "varchar"
+					},
+					{
+						"name": "fk_personId",
+						"type": "varchar"
+					},
+					{
+						"name": "occupation",
+						"type": "varchar"
+					},
+					{
+						"name": "occupationOther",
+						"type": "varchar"
+					},
+					{
+						"name": "type",
+						"type": "varchar"
+					},
+					{
+						"name": "interests",
+						"type": "varchar"
+					},
+					{
+						"name": "interestsOtherValue",
+						"type": "varchar"
+					},
+					{
+						"name": "referallSource",
+						"type": "varchar"
+					},
+					{
+						"name": "referallSourceOther",
+						"type": "varchar"
+					},
+					{
+						"name": "relationToUsmc",
+						"type": "varchar"
+					},
+					{
+						"name": "relationToUsmcOther",
+						"type": "varchar"
+					},
+					{
+						"name": "collegeAttended",
+						"type": "varchar"
+					},
+					{
+						"name": "organizationAffiliations",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentAssignedBilletGroup",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentAssignmentMethod",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentAssignmentComments",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentSource",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentStatusReason",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentStatusDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "profileCompletedDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "firstEmailDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "fiveDayEmailDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "tenDayEmailDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "reassignmentCount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "pendingArchiveEmailDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "fk_educationId",
+						"type": "char"
+					},
+					{
+						"name": "mostRecentAssignmentDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "homeTownCity",
+						"type": "varchar"
+					},
+					{
+						"name": "homeTownState",
+						"type": "varchar"
+					},
+					{
+						"name": "doNotContact",
+						"type": "bit"
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsInfluencer"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aitsInfluencerEventReference')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_influencerId",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_eventContract",
+						"type": "nchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsInfluencerEventReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aitsPerson')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dev_sandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "char"
+					},
+					{
+						"name": "mcrissEthnicCategory",
+						"type": "varchar"
+					},
+					{
+						"name": "mcrissGender",
+						"type": "varchar"
+					},
+					{
+						"name": "genderIsInferred",
+						"type": "bit"
+					},
+					{
+						"name": "mcrissRace",
+						"type": "varchar"
+					},
+					{
+						"name": "mcrisRaceOtherDetail",
+						"type": "varchar"
+					},
+					{
+						"name": "age",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "yearOfBirth",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "monthOfBirth",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "namePrefix",
+						"type": "varchar"
+					},
+					{
+						"name": "firstName",
+						"type": "varchar"
+					},
+					{
+						"name": "lastName",
+						"type": "varchar"
+					},
+					{
+						"name": "middleName",
+						"type": "varchar"
+					},
+					{
+						"name": "nameSuffix",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentFulfillmentItem",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentAttributedPromotion",
+						"type": "varchar"
+					},
+					{
+						"name": "mostRecentAssignment",
+						"type": "varchar"
+					},
+					{
+						"name": "mcrissId",
+						"type": "varchar"
+					},
+					{
+						"name": "mcrissAcceptance",
+						"type": "varchar"
+					},
+					{
+						"name": "environmentOfRecord",
+						"type": "varchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "varchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "updatedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsPerson"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aitsPersonContactEmailInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "char"
+					},
+					{
+						"name": "fk_contactEmailInfoId",
+						"type": "varchar"
+					},
+					{
+						"name": "fk_personId",
+						"type": "char"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "createdBy",
+						"type": "varchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "updatedBy",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsPersonContactEmailInfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aitsPersonContactPhoneInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_personId",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_contactPhoneInfoId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitspersoncontactphoneinfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aits_Influencer')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "hash",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_personId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "occupation",
+						"type": "nvarchar"
+					},
+					{
+						"name": "occupationOther",
+						"type": "nvarchar"
+					},
+					{
+						"name": "type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "interests",
+						"type": "nvarchar"
+					},
+					{
+						"name": "interestsOtherValue",
+						"type": "nvarchar"
+					},
+					{
+						"name": "referallSource",
+						"type": "nvarchar"
+					},
+					{
+						"name": "referallSourceOther",
+						"type": "nvarchar"
+					},
+					{
+						"name": "relationToUsmc",
+						"type": "nvarchar"
+					},
+					{
+						"name": "relationToUsmcOther",
+						"type": "nvarchar"
+					},
+					{
+						"name": "collegeAttended",
+						"type": "nvarchar"
+					},
+					{
+						"name": "organizationAffiliations",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAssignedBilletGroup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAssignmentMethod",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAssignmentComments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentSource",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentStatusReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentStatusDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "profileCompletedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "firstEmailDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "fiveDayEmailDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "tenDayEmailDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "reassignmentCount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "pendingArchiveEmailDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "fk_educationId",
+						"type": "nchar"
+					},
+					{
+						"name": "mostRecentAssignmentDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "homeTownCity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "homeTownState",
+						"type": "nvarchar"
+					},
+					{
+						"name": "doNotContact",
+						"type": "bit"
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FK_LOC_UNIT_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "RANK",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsinfluencer"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aits_Person')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "mcrissEthnicCategory",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mcrissGender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "genderIsInferred",
+						"type": "bit"
+					},
+					{
+						"name": "mcrissRace",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mcrisRaceOtherDetail",
+						"type": "nvarchar"
+					},
+					{
+						"name": "age",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "yearOfBirth",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "monthOfBirth",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "namePrefix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "firstName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "lastName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "middleName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "nameSuffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentFulfillmentItem",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAttributedPromotion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAssignment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mcrissId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mcrissAcceptance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "environmentOfRecord",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "fk_locMcrcSchoolId",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsPerson"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ecci_unzip_source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_CMR",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "wk_ContainerData_Flattened.csv",
+						"folderPath": "file-aitsi-fluidforms-etl-20241212.zip",
+						"container": "ecci"
+					},
+					"columnDelimiter": ",",
+					"compressionCodec": null,
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "PersonId",
+						"type": "String"
+					},
+					{
+						"name": "ContainerId",
+						"type": "String"
+					},
+					{
+						"name": "Address_Apt_Unit",
+						"type": "String"
+					},
+					{
+						"name": "Address_City",
+						"type": "String"
+					},
+					{
+						"name": "Address_State",
+						"type": "String"
+					},
+					{
+						"name": "Address_Street",
+						"type": "String"
+					},
+					{
+						"name": "Address_Zip",
+						"type": "String"
+					},
+					{
+						"name": "Advanced_Course_Name",
+						"type": "String"
+					},
+					{
+						"name": "Advanced_Course_Type",
+						"type": "String"
+					},
+					{
+						"name": "Advanced_Courses_Taken",
+						"type": "String"
+					},
+					{
+						"name": "Awards_Selector",
+						"type": "String"
+					},
+					{
+						"name": "College",
+						"type": "String"
+					},
+					{
+						"name": "Date_Attended",
+						"type": "String"
+					},
+					{
+						"name": "Date_of_Birth_Month",
+						"type": "String"
+					},
+					{
+						"name": "Date_of_Birth_Year",
+						"type": "String"
+					},
+					{
+						"name": "Disciplinary_Issues",
+						"type": "String"
+					},
+					{
+						"name": "Do_Not_Contact",
+						"type": "String"
+					},
+					{
+						"name": "Email",
+						"type": "String"
+					},
+					{
+						"name": "Email_list_opt_out",
+						"type": "String"
+					},
+					{
+						"name": "Ethnicity",
+						"type": "String"
+					},
+					{
+						"name": "Event_Attendance",
+						"type": "String"
+					},
+					{
+						"name": "Event_Attendance_Describe",
+						"type": "String"
+					},
+					{
+						"name": "Event_City",
+						"type": "String"
+					},
+					{
+						"name": "Event_State",
+						"type": "String"
+					},
+					{
+						"name": "Extracurricular_Activities",
+						"type": "String"
+					},
+					{
+						"name": "Extracurricular_Activities_Years",
+						"type": "String"
+					},
+					{
+						"name": "Extracurricular_Selector",
+						"type": "String"
+					},
+					{
+						"name": "First_Name",
+						"type": "String"
+					},
+					{
+						"name": "Gender",
+						"type": "String"
+					},
+					{
+						"name": "GPA_Scale",
+						"type": "String"
+					},
+					{
+						"name": "Grade_Level_Junior",
+						"type": "String"
+					},
+					{
+						"name": "Grade_Level_Junior_or_Sophomore",
+						"type": "String"
+					},
+					{
+						"name": "Graduation_Year",
+						"type": "String"
+					},
+					{
+						"name": "Homeschooled",
+						"type": "String"
+					},
+					{
+						"name": "Hometown_City",
+						"type": "String"
+					},
+					{
+						"name": "Hometown_State",
+						"type": "String"
+					},
+					{
+						"name": "Honors_Awards",
+						"type": "String"
+					},
+					{
+						"name": "Influencer_Opt_In",
+						"type": "String"
+					},
+					{
+						"name": "Interests",
+						"type": "String"
+					},
+					{
+						"name": "JROTC_Branch",
+						"type": "String"
+					},
+					{
+						"name": "JROTC_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Last_Name",
+						"type": "String"
+					},
+					{
+						"name": "Leadership_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Leadership_Years",
+						"type": "String"
+					},
+					{
+						"name": "Legal_Infraction",
+						"type": "String"
+					},
+					{
+						"name": "Legal_Resident",
+						"type": "String"
+					},
+					{
+						"name": "Letter_of_Recommendation_1",
+						"type": "String"
+					},
+					{
+						"name": "Marines_Opt_In",
+						"type": "String"
+					},
+					{
+						"name": "Nominee",
+						"type": "String"
+					},
+					{
+						"name": "Nominee_Relationship",
+						"type": "String"
+					},
+					{
+						"name": "Occupation",
+						"type": "String"
+					},
+					{
+						"name": "Other_Courses",
+						"type": "String"
+					},
+					{
+						"name": "Other_Interests",
+						"type": "String"
+					},
+					{
+						"name": "Other_Marines_Relationship_Type",
+						"type": "String"
+					},
+					{
+						"name": "Other_Nominee_Relationship",
+						"type": "String"
+					},
+					{
+						"name": "Other_Occuptation",
+						"type": "String"
+					},
+					{
+						"name": "Other_Sports",
+						"type": "String"
+					},
+					{
+						"name": "Phone_Number",
+						"type": "String"
+					},
+					{
+						"name": "Poolee_Academy_NROTC",
+						"type": "String"
+					},
+					{
+						"name": "Poolee_Academy_NROTC_Delayed_Entry_Program",
+						"type": "String"
+					},
+					{
+						"name": "Referral",
+						"type": "String"
+					},
+					{
+						"name": "Referral_Other",
+						"type": "String"
+					},
+					{
+						"name": "Relationship_to_Marines",
+						"type": "String"
+					},
+					{
+						"name": "School_Name",
+						"type": "String"
+					},
+					{
+						"name": "School_Community_Leadership",
+						"type": "String"
+					},
+					{
+						"name": "SIPRM_Username",
+						"type": "String"
+					},
+					{
+						"name": "SLCDA_Referral",
+						"type": "String"
+					},
+					{
+						"name": "Source",
+						"type": "String"
+					},
+					{
+						"name": "Sports_JV_Varsity",
+						"type": "String"
+					},
+					{
+						"name": "Sports_Played",
+						"type": "String"
+					},
+					{
+						"name": "Sports_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Sports_Years_Played",
+						"type": "String"
+					},
+					{
+						"name": "Team_Captain",
+						"type": "String"
+					},
+					{
+						"name": "Team_Captain_Describe",
+						"type": "String"
+					},
+					{
+						"name": "Visible_Tattoos",
+						"type": "String"
+					},
+					{
+						"name": "Volunteer_Hours_Week",
+						"type": "String"
+					},
+					{
+						"name": "Volunteer_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Volunteer_Work",
+						"type": "String"
+					},
+					{
+						"name": "Work_Experience",
+						"type": "String"
+					},
+					{
+						"name": "Work_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Work_Years",
+						"type": "String"
+					},
+					{
+						"name": "DateCreatedUTC",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ecci_unzip_source_1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_ECCI",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "wk_AssignmentHistory_AITSII.csv",
+						"folderPath": "file-aitsi-ecci-etl-20250109.zip",
+						"container": "ecci"
+					},
+					"columnDelimiter": ",",
+					"compressionCodec": null,
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "id",
+						"type": "String"
+					},
+					{
+						"name": "Id",
+						"type": "String"
+					},
+					{
+						"name": "AppicationId",
+						"type": "String"
+					},
+					{
+						"name": "PersonId",
+						"type": "String"
+					},
+					{
+						"name": "AssignmentType",
+						"type": "String"
+					},
+					{
+						"name": "DistrictNumber",
+						"type": "String"
+					},
+					{
+						"name": "RecruitingStationNumber",
+						"type": "String"
+					},
+					{
+						"name": "RecruitingStationName",
+						"type": "String"
+					},
+					{
+						"name": "Aits1BaseLineId",
+						"type": "String"
+					},
+					{
+						"name": "DateCreatedUTC",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/loc_mcrc_unit')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NAME_FULL",
+						"type": "nvarchar"
+					},
+					{
+						"name": "NAME_SHORT",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FK_TYPE_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FK_PARENT_UNIT_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATED_DATE_TIME",
+						"type": "datetime2",
+						"scale": 6
+					},
+					{
+						"name": "UPDATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UPDATED_DATE_TIME",
+						"type": "datetime2",
+						"scale": 6
+					},
+					{
+						"name": "AITS_BASELINE_ID",
+						"type": "varchar"
+					},
+					{
+						"name": "APPIAN_GROUP_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "IS_ACTIVE",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "loc_mcrc_unit"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/THOM-Pipe-DEV-ECCI2MDML-EastUS-Unzip')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "THOM Unzip ECCI Files",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.zip",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ""
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ecci_unzip_source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ECCI_Zip_Files",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2025-02-19T21:52:15Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ecci_unzip_source')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UnzipECCI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "UNZIPECCI",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureFileStorageReadSettings",
+									"recursive": true,
+									"modifiedDatetimeStart": null,
+									"modifiedDatetimeEnd": null,
+									"wildcardFileName": "*.zip"
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_BinaryECCI_Source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_ECCI_Destination",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "THOM-Pipe-DF-ECCI2MDML-EastUS"
+				},
+				"annotations": [],
+				"lastPublishTime": "2025-02-20T13:28:29Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Unzip_CMR')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Unzip_CMR",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureFileStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.zip",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "MergeFiles"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ""
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "CMR_Source_Files",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "CMR_Dest",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "THOM-Pipe-DF-CMR2MDML-EastUS"
+				},
+				"annotations": [],
+				"lastPublishTime": "2025-03-21T20:01:48Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Unzip_CMR1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Unzip_CMR1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureFileStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.zip",
+									"deleteFilesAfterCompletion": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "CMR_Source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "CMR_Dest1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "THOM-Pipe-DF-CMR2MDML-EastUS"
+				},
+				"annotations": [],
+				"lastPublishTime": "2025-04-16T21:04:01Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AitsAfterAction')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "CMR_DataFlow"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "EventReport",
+								"type": "DatasetReference"
+							},
+							"name": "CMR"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AitsAfterAction",
+								"type": "DatasetReference"
+							},
+							"name": "aitsAfterAction",
+							"description": "Export data to aitsAddressInfo"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumns"
+						},
+						{
+							"name": "Upsert"
+						}
+					],
+					"scriptLines": [
+						"parameters{",
+						"     parameter1 as string ('AzurePipeline')",
+						"}",
+						"source(output(",
+						"          id as string,",
+						"          userId as string,",
+						"          eventId as string,",
+						"          approverId as string,",
+						"          approvalDue as string,",
+						"          status as string,",
+						"          subStatus as string,",
+						"          attendance as string,",
+						"          marinesAttendance as string,",
+						"          leadCards as string,",
+						"          attended as string,",
+						"          interviewsScheduled as string,",
+						"          recruiter as string,",
+						"          electricity as string,",
+						"          accommodating as string,",
+						"          recommend as string,",
+						"          emvAttend as string,",
+						"          recommendReason as string,",
+						"          deliverable as string,",
+						"          description as string,",
+						"          objective as string,",
+						"          behavior as string,",
+						"          awareness as string,",
+						"          engagements as string,",
+						"          mediaPosts as string,",
+						"          mediaImpressions as string,",
+						"          socialMediaPosts as string,",
+						"          socialMediaImpressions as string,",
+						"          qualifiedLeads as string,",
+						"          influencerContacts as string,",
+						"          followUps as string,",
+						"          interaction as string,",
+						"          influencerInteraction as string,",
+						"          onsiteActivations as string,",
+						"          targetMarketRating as string,",
+						"          targetMarketComments as string,",
+						"          estimatedAttendance as string,",
+						"          estimatedTargetAttendance as string,",
+						"          comingOfAgeRating as string,",
+						"          comingOfAgeComments as string,",
+						"          influentialRating as string,",
+						"          influentialComments as string,",
+						"          communityRelationsRating as string,",
+						"          communityRelationsComments as string,",
+						"          leadGenerationRating as string,",
+						"          leadGenerationComments as string,",
+						"          keyParticipants as string,",
+						"          problems as string,",
+						"          concerns as string,",
+						"          comments as string,",
+						"          approvedDistrictName as string,",
+						"          approvedRecruitingStationName as string,",
+						"          approvingUser as string,",
+						"          approvingBillet as string,",
+						"          approvingLocation as string,",
+						"          createdById as string,",
+						"          createdByUsername as string,",
+						"          updatedById as string,",
+						"          updatedByUsername as string,",
+						"          createdAt as string,",
+						"          updatedAt as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     multiLineRow: true) ~> CMR",
+						"CMR derive(guid = uuid(),",
+						"          CreateDate = currentTimestamp(),",
+						"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
+						"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
+						"Upsert sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          id as string,",
+						"          problemsOrConcerns as string,",
+						"          description as string,",
+						"          deliverables as string,",
+						"          additionalDeliverables as string,",
+						"          personalInNatureDeliverables as string,",
+						"          numberOfAttendees as integer,",
+						"          numberOfInfluencerContactsGenerated as integer,",
+						"          numberOfLeadCardsSubmitted as integer,",
+						"          numberOfLeadsThatInteractedWithMarines as integer,",
+						"          numberOfOverallInteractions as integer,",
+						"          numberOfSocialMediaImpressions as integer,",
+						"          numberOfSocialMediaPosts as integer,",
+						"          numberOfTraditionalMediaImpressions as integer,",
+						"          numberOfTraditionalMediaPosts as integer,",
+						"          objective as string,",
+						"          ownerBilletGroup as string,",
+						"          statusLookup as string,",
+						"          subStatusLookup as string,",
+						"          createdBy as string,",
+						"          createdDateGmt as timestamp,",
+						"          updatedBy as string,",
+						"          updatedDateGmt as timestamp,",
+						"          numberOfQualifiedLeadsGenerated as integer,",
+						"          aitsBaselineId as string,",
+						"          numberOfInfluencersThatInteractedWithMarines as integer",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:true,",
+						"     keys:['id'],",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          id,",
+						"          statusLookup = status,",
+						"          numberOfAttendees = attendance,",
+						"          numberOfLeadCardsSubmitted = leadCards,",
+						"          deliverables = deliverable,",
+						"          description,",
+						"          objective,",
+						"          numberOfTraditionalMediaPosts = mediaPosts,",
+						"          numberOfTraditionalMediaImpressions = mediaImpressions,",
+						"          numberOfSocialMediaPosts = socialMediaPosts,",
+						"          numberOfSocialMediaImpressions = socialMediaImpressions,",
+						"          numberOfQualifiedLeadsGenerated = qualifiedLeads,",
+						"          numberOfInfluencerContactsGenerated = influencerContacts,",
+						"          numberOfOverallInteractions = interaction,",
+						"          numberOfAttendees = estimatedAttendance,",
+						"          problemsOrConcerns = problems,",
+						"          problemsOrConcerns = concerns,",
+						"          createdBy = createdByUsername,",
+						"          updatedBy = updatedByUsername,",
+						"          createdDateGmt = CreateDate,",
+						"          updatedDateGmt = updatedAt",
+						"     )) ~> aitsAfterAction"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AitsEventContract')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "CMR_DataFlow"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "CMR_Dest",
+								"type": "DatasetReference"
+							},
+							"name": "CMR"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AitsEventContract",
+								"type": "DatasetReference"
+							},
+							"name": "aitsEventContract",
+							"description": "Export data to aitsAddressInfo"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumns"
+						},
+						{
+							"name": "Upsert"
+						}
+					],
+					"scriptLines": [
+						"parameters{",
+						"     parameter1 as string ('AzurePipeline')",
+						"}",
+						"source(output(",
+						"          id as string,",
+						"          parentId as string,",
+						"          name as string,",
+						"          cost as string,",
+						"          dateContractedSigned as string,",
+						"          eacCode as string,",
+						"          approverId as string,",
+						"          approvalDue as string,",
+						"          regionCode as string,",
+						"          districtCode as string,",
+						"          recruitingStationCode as string,",
+						"          recruitingSubStationCode as string,",
+						"          ossCode as string,",
+						"          fundingRegionCode as string,",
+						"          fundingDistrictCode as string,",
+						"          fundingRecruitingStationCode as string,",
+						"          fundingRecruitingSubStationCode as string,",
+						"          fundingOssCode as string,",
+						"          qualifiedName as string,",
+						"          sourceCode as string,",
+						"          fiscalYear as string,",
+						"          city as string,",
+						"          state as string,",
+						"          startDate as string,",
+						"          endDate as string,",
+						"          customCategory as string,",
+						"          type as string,",
+						"          status as string,",
+						"          subStatus as string,",
+						"          isFromPr as string,",
+						"          isFromEac as string,",
+						"          contract as string,",
+						"          schoolName as string,",
+						"          raoUsername as string,",
+						"          rejectComments as string,",
+						"          approvedDistrictName as string,",
+						"          approvedRecruitingStationName as string,",
+						"          approvedRecruitingSubStationName as string,",
+						"          approvingUser as string,",
+						"          approvingBillet as string,",
+						"          approvingLocation as string,",
+						"          purpose as string,",
+						"          estAttendance as string,",
+						"          behavior as string,",
+						"          awareness as string,",
+						"          estEngagements as string,",
+						"          estMediaPosts as string,",
+						"          estMediaImpressions as string,",
+						"          estSocialMediaPosts as string,",
+						"          estSocialMediaImpressions as string,",
+						"          estQualifiedLeads as string,",
+						"          estInfluencerContacts as string,",
+						"          estFollowUps as string,",
+						"          estInteraction as string,",
+						"          estInfluencerInteraction as string,",
+						"          estOnsiteActivations as string,",
+						"          deliverable as string,",
+						"          addlDeliverables as string,",
+						"          recommend as string,",
+						"          emvAttend as string,",
+						"          recommendReason as string,",
+						"          assignedBy as string,",
+						"          oldCategory as string,",
+						"          oldEventId as string,",
+						"          createdById as string,",
+						"          createdByUsername as string,",
+						"          updatedById as string,",
+						"          updatedByUsername as string,",
+						"          createdAt as string,",
+						"          updatedAt as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     multiLineRow: true) ~> CMR",
+						"CMR derive(guid = uuid(),",
+						"          CreateDate = currentTimestamp(),",
+						"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
+						"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
+						"Upsert sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          id as string,",
+						"          name as string,",
+						"          systemGeneratedName as string,",
+						"          selfReportedOtherCategory as string,",
+						"          purpose as string,",
+						"          EVENT_TYPE as string,",
+						"          cost as double,",
+						"          LOCATION_NAME as string,",
+						"          STREET_ADDRESS1 as string,",
+						"          STREET_ADDRESS2 as string,",
+						"          city as string,",
+						"          stateLookup as string,",
+						"          zipCode as string,",
+						"          fk_fiscalYearId as string,",
+						"          fk_afteractionId as string,",
+						"          fk_fundingMcrcUnitId as integer,",
+						"          fk_purchaseRequestId as string,",
+						"          fk_parentEventContractId as string,",
+						"          fk_proposalFileId as string,",
+						"          fk_promotionId as string,",
+						"          assignedOwner as string,",
+						"          statusLookup as string,",
+						"          subStatusLookup as string,",
+						"          dateContractSigned as timestamp,",
+						"          deliverables as string,",
+						"          additionalDeliverables as string,",
+						"          personalInNatureDeliverables as string,",
+						"          estimatedAttendence as integer,",
+						"          estimatedNumberOfInfluencerContacts as integer,",
+						"          estimatedNumberOfLeads as integer,",
+						"          estimatedNumberOfOverallInteractions as integer,",
+						"          estimatedNumberOfSocialMediaImpressions as integer,",
+						"          estimatedNumberOfSocialMediaPosts as integer,",
+						"          estimatedNumberOfTraditionalMediaPosts as integer,",
+						"          estimatedNumberOfTraditionalImpressions as integer,",
+						"          numberOfContractedOnSiteActivations as integer,",
+						"          hasPersonalInNatureDeliverables as integer,",
+						"          isContracted as integer,",
+						"          isFree as integer,",
+						"          hheac as string,",
+						"          submitter as string,",
+						"          createdBy as string,",
+						"          createdDateGmt as timestamp,",
+						"          updatedBy as string,",
+						"          updatedDateGmt as timestamp,",
+						"          fk_proposalId as string,",
+						"          hasParentContract as integer,",
+						"          startDateGmt as timestamp,",
+						"          endDateGmt as timestamp,",
+						"          usesHandheld as integer,",
+						"          isforInfluencers as integer,",
+						"          includesBattlePosition as integer,",
+						"          fk_McrcUnitId as integer,",
+						"          aitsBaselineId as string,",
+						"          FK_LOC_UNIT_ID as string,",
+						"          rmiFields as string,",
+						"          rmiQuestions as string,",
+						"          FK_ASSIGNED_OWNER_LOC_UNIT_ID as string,",
+						"          assignedDate as timestamp,",
+						"          dueDate as timestamp",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:true,",
+						"     keys:['id'],",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          id = guid,",
+						"          aitsBaselineId = id,",
+						"          deliverables = deliverable,",
+						"          additionalDeliverables = addlDeliverables,",
+						"          dateContractSigned = dateContractedSigned,",
+						"          name,",
+						"          cost,",
+						"          hheac = eacCode,",
+						"          startDateGmt = startDate,",
+						"          city,",
+						"          endDateGmt = endDate,",
+						"          statusLookup = status,",
+						"          subStatusLookup = subStatus,",
+						"          systemGeneratedName = qualifiedName,",
+						"          stateLookup = state,",
+						"          selfReportedOtherCategory = customCategory,",
+						"          purpose,",
+						"          estimatedAttendence = estAttendance,",
+						"          estimatedNumberOfTraditionalMediaPosts = estMediaPosts,",
+						"          estimatedNumberOfTraditionalImpressions = estMediaImpressions,",
+						"          estimatedNumberOfSocialMediaPosts = estSocialMediaPosts,",
+						"          estimatedNumberOfSocialMediaImpressions = estSocialMediaImpressions,",
+						"          estimatedNumberOfLeads = estQualifiedLeads,",
+						"          estimatedNumberOfInfluencerContacts = estInfluencerContacts,",
+						"          estimatedNumberOfOverallInteractions = estInteraction,",
+						"          createdBy = createdByUsername,",
+						"          updatedBy = updatedByUsername,",
+						"          createdDateGmt = createdAt,",
+						"          updatedDateGmt = updatedAt",
+						"     )) ~> aitsEventContract"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/THOM_DataFlow_DEV_ECCI2MDML_EastUS_EcciInfluencerAssignmentHistory')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ecci_unzip_source_1",
+								"type": "DatasetReference"
+							},
+							"name": "ECCI"
+						},
+						{
+							"dataset": {
+								"referenceName": "loc_mcrc_unit",
+								"type": "DatasetReference"
+							},
+							"name": "LocMcrcUnit"
+						},
+						{
+							"dataset": {
+								"referenceName": "aits_Influencer",
+								"type": "DatasetReference"
+							},
+							"name": "AitsInfluencer"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "EcciInfluencerAssignmentHistory",
+								"type": "DatasetReference"
+							},
+							"name": "EcciInfluencerAssignmentHistory",
+							"description": "Export data to aitsInfluencerEventReference"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumns"
+						},
+						{
+							"name": "join1"
+						},
+						{
+							"name": "join2"
+						},
+						{
+							"name": "Upsert"
+						}
+					],
+					"scriptLines": [
+						"parameters{",
+						"     parameter1 as string ('AzurePipeline')",
+						"}",
+						"source(output(",
+						"          id as string,",
+						"          Id as string,",
+						"          AppicationId as string,",
+						"          PersonId as string,",
+						"          AssignmentType as string,",
+						"          DistrictNumber as string,",
+						"          RecruitingStationNumber as string,",
+						"          RecruitingStationName as string,",
+						"          Aits1BaseLineId as string,",
+						"          DateCreatedUTC as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> ECCI",
+						"source(output(",
+						"          ID as string,",
+						"          NAME_FULL as string,",
+						"          NAME_SHORT as string,",
+						"          FK_TYPE_ID as string,",
+						"          FK_PARENT_UNIT_ID as string,",
+						"          CREATED_BY as string,",
+						"          CREATED_DATE_TIME as timestamp,",
+						"          UPDATED_BY as string,",
+						"          UPDATED_DATE_TIME as timestamp,",
+						"          AITS_BASELINE_ID as string,",
+						"          APPIAN_GROUP_ID as string,",
+						"          IS_ACTIVE as boolean",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> LocMcrcUnit",
+						"source(output(",
+						"          id as string,",
+						"          createdBy as string,",
+						"          createdDateGmt as timestamp,",
+						"          updatedBy as string,",
+						"          updatedDateGmt as timestamp,",
+						"          hash as string,",
+						"          fk_personId as string,",
+						"          occupation as string,",
+						"          occupationOther as string,",
+						"          type as string,",
+						"          interests as string,",
+						"          interestsOtherValue as string,",
+						"          referallSource as string,",
+						"          referallSourceOther as string,",
+						"          relationToUsmc as string,",
+						"          relationToUsmcOther as string,",
+						"          collegeAttended as string,",
+						"          organizationAffiliations as string,",
+						"          mostRecentAssignedBilletGroup as string,",
+						"          mostRecentAssignmentMethod as string,",
+						"          mostRecentAssignmentComments as string,",
+						"          mostRecentSource as string,",
+						"          mostRecentStatus as string,",
+						"          mostRecentStatusReason as string,",
+						"          mostRecentStatusDateGmt as timestamp,",
+						"          profileCompletedDateGmt as timestamp,",
+						"          firstEmailDateGmt as timestamp,",
+						"          fiveDayEmailDateGmt as timestamp,",
+						"          tenDayEmailDateGmt as timestamp,",
+						"          reassignmentCount as integer,",
+						"          pendingArchiveEmailDateGmt as timestamp,",
+						"          fk_educationId as string,",
+						"          mostRecentAssignmentDateGmt as timestamp,",
+						"          homeTownCity as string,",
+						"          homeTownState as string,",
+						"          doNotContact as boolean,",
+						"          aitsBaselineId as string,",
+						"          FK_LOC_UNIT_ID as string,",
+						"          RANK as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> AitsInfluencer",
+						"join2 derive(guid = uuid(),",
+						"          CreateDate = currentTimestamp(),",
+						"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
+						"ECCI, LocMcrcUnit join(Aits1BaseLineId == AITS_BASELINE_ID,",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> join1",
+						"join1, AitsInfluencer join(PersonId == aitsBaselineId,",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> join2",
+						"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
+						"Upsert sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          ID as string,",
+						"          FK_INFLUENCER_ID as string,",
+						"          FK_LOC_UNIT_ID as string,",
+						"          CREATED_BY as string,",
+						"          CREATED_ON as timestamp,",
+						"          UPDATED_BY as string,",
+						"          UPDATED_ON as timestamp",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:true,",
+						"     keys:['ID'],",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          ID = ECCI@id,",
+						"          FK_INFLUENCER_ID = aitsBaselineId,",
+						"          FK_LOC_UNIT_ID = AITS_BASELINE_ID,",
+						"          CREATED_BY = CreatedBy,",
+						"          CREATED_ON = CreateDate",
+						"     )) ~> EcciInfluencerAssignmentHistory"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ecci_unzip_source_1')]",
+				"[concat(variables('factoryId'), '/datasets/loc_mcrc_unit')]",
+				"[concat(variables('factoryId'), '/datasets/aits_Influencer')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/THOM_DataFlow_DEV_ECCI2MDML_EastUS_aitsAddressInfo')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "ecci_unzip_source",
+								"type": "DatasetReference"
+							},
+							"name": "ECCI"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "aitsAddressInfo",
+								"type": "DatasetReference"
+							},
+							"name": "aitsAddressInfo",
+							"description": "Export data to aitsAddressInfo"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumns"
+						},
+						{
+							"name": "Upsert"
+						}
+					],
+					"scriptLines": [
+						"parameters{",
+						"     parameter1 as string ('AzurePipeline')",
+						"}",
+						"source(output(",
+						"          PersonId as string,",
+						"          ContainerId as string,",
+						"          Address_Apt_Unit as string,",
+						"          Address_City as string,",
+						"          Address_State as string,",
+						"          Address_Street as string,",
+						"          Address_Zip as string,",
+						"          Advanced_Course_Name as string,",
+						"          Advanced_Course_Type as string,",
+						"          Advanced_Courses_Taken as string,",
+						"          Awards_Selector as string,",
+						"          College as string,",
+						"          Date_Attended as string,",
+						"          Date_of_Birth_Month as string,",
+						"          Date_of_Birth_Year as string,",
+						"          Disciplinary_Issues as string,",
+						"          Do_Not_Contact as string,",
+						"          Email as string,",
+						"          Email_list_opt_out as string,",
+						"          Ethnicity as string,",
+						"          Event_Attendance as string,",
+						"          Event_Attendance_Describe as string,",
+						"          Event_City as string,",
+						"          Event_State as string,",
+						"          Extracurricular_Activities as string,",
+						"          Extracurricular_Activities_Years as string,",
+						"          Extracurricular_Selector as string,",
+						"          First_Name as string,",
+						"          Gender as string,",
+						"          GPA_Scale as string,",
+						"          Grade_Level_Junior as string,",
+						"          Grade_Level_Junior_or_Sophomore as string,",
+						"          Graduation_Year as string,",
+						"          Homeschooled as string,",
+						"          Hometown_City as string,",
+						"          Hometown_State as string,",
+						"          Honors_Awards as string,",
+						"          Influencer_Opt_In as string,",
+						"          Interests as string,",
+						"          JROTC_Branch as string,",
+						"          JROTC_Selector as string,",
+						"          Last_Name as string,",
+						"          Leadership_Selector as string,",
+						"          Leadership_Years as string,",
+						"          Legal_Infraction as string,",
+						"          Legal_Resident as string,",
+						"          Letter_of_Recommendation_1 as string,",
+						"          Marines_Opt_In as string,",
+						"          Nominee as string,",
+						"          Nominee_Relationship as string,",
+						"          Occupation as string,",
+						"          Other_Courses as string,",
+						"          Other_Interests as string,",
+						"          Other_Marines_Relationship_Type as string,",
+						"          Other_Nominee_Relationship as string,",
+						"          Other_Occuptation as string,",
+						"          Other_Sports as string,",
+						"          Phone_Number as string,",
+						"          Poolee_Academy_NROTC as string,",
+						"          Poolee_Academy_NROTC_Delayed_Entry_Program as string,",
+						"          Referral as string,",
+						"          Referral_Other as string,",
+						"          Relationship_to_Marines as string,",
+						"          School_Name as string,",
+						"          School_Community_Leadership as string,",
+						"          SIPRM_Username as string,",
+						"          SLCDA_Referral as string,",
+						"          Source as string,",
+						"          Sports_JV_Varsity as string,",
+						"          Sports_Played as string,",
+						"          Sports_Selector as string,",
+						"          Sports_Years_Played as string,",
+						"          Team_Captain as string,",
+						"          Team_Captain_Describe as string,",
+						"          Visible_Tattoos as string,",
+						"          Volunteer_Hours_Week as string,",
+						"          Volunteer_Selector as string,",
+						"          Volunteer_Work as string,",
+						"          Work_Experience as string,",
+						"          Work_Selector as string,",
+						"          Work_Years as string,",
+						"          DateCreatedUTC as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> ECCI",
+						"ECCI derive(guid = uuid(),",
+						"          CreateDate = currentTimestamp(),",
+						"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
+						"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
+						"Upsert sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          id as string,",
+						"          addressLine1 as string,",
+						"          addressLine2 as string,",
+						"          addressLine3 as string,",
+						"          archivedDate as date,",
+						"          city as string,",
+						"          county as string,",
+						"          isArchived as integer,",
+						"          isPrimary as integer,",
+						"          latitude as string,",
+						"          longitude as string,",
+						"          optedOut as integer,",
+						"          optedOutDate as date,",
+						"          stateLookup as string,",
+						"          statusLookup as string,",
+						"          statusDate as date,",
+						"          statusReason as string,",
+						"          typeLookup as string,",
+						"          zipCode as string,",
+						"          zipRoute as string,",
+						"          createdBy as string,",
+						"          createdDateGMT as timestamp,",
+						"          updatedBy as string,",
+						"          updatedDateGMT as timestamp,",
+						"          aitsBaselineId as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:true,",
+						"     keys:['aitsBaselineId'],",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          id = guid,",
+						"          addressLine1 = Address_Street,",
+						"          addressLine2 = Address_Apt_Unit,",
+						"          city = Address_City,",
+						"          stateLookup = Address_State,",
+						"          zipCode = Address_Zip,",
+						"          createdDateGMT = CreateDate,",
+						"          createdBy = CreatedBy,",
+						"          aitsBaselineId = PersonId",
+						"     )) ~> aitsAddressInfo"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ecci_unzip_source')]"
+			]
+		}
+	]
+}

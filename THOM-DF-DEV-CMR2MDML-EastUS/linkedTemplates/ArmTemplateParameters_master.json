@@ -1,0 +1,69 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "THOM-DF-DEV-CMR2MDML-EastUS"
+		},
+		"AzureBlobStorage11_connectionString": {
+			"value": ""
+		},
+		"AzureFileStorage1_connectionString": {
+			"value": ""
+		},
+		"CMR_Dest1_connectionString": {
+			"value": ""
+		},
+		"LS_ABLB_CMR_connectionString": {
+			"value": ""
+		},
+		"LS_ABLB_ECCI_connectionString": {
+			"value": ""
+		},
+		"LS_ABLB_ECCIV_connectionString": {
+			"value": ""
+		},
+		"LS_ABLB_ECCI_V_connectionString": {
+			"value": ""
+		},
+		"LS_FILE_ECCI_connectionString": {
+			"value": ""
+		},
+		"LS_FILE_ECCIS_connectionString": {
+			"value": ""
+		},
+		"LS_File_CMR_connectionString": {
+			"value": ""
+		},
+		"LS_File_CMR1_connectionString": {
+			"value": ""
+		},
+		"LS_Fileshare_connectionString": {
+			"value": ""
+		},
+		"LS_SQL_MDML_DMSandbox_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=usmcdevdb.database.windows.net;Initial Catalog=MDML_DMSandbox"
+		},
+		"VML_BLOB_DEV_MDML_EastUS_connectionString": {
+			"value": ""
+		},
+		"dev_sandbox_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=usmcdevdb.database.windows.net;Initial Catalog=MDML_DMSandbox"
+		},
+		"LS_SQL_MDML_DEV_properties_typeProperties_server": {
+			"value": "azuresql-etl20240819.database.windows.net"
+		},
+		"LS_SQL_MDML_DEV_properties_typeProperties_database": {
+			"value": "THOM-DB-DEV-MDML-EastUS"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"value": "/subscriptions/71c8d1a1-6097-48a4-90c9-b9fae74f4551/resourceGroups/WTRG/providers/Microsoft.Storage/storageAccounts/usmcdevfiles"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

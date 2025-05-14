@@ -1,0 +1,1881 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "THOM-DF-DEV-CMR2MDML-EastUS"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CMR_Dest1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CMR_Dest1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "cmr"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CMR_Source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_File_CMR1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureFileStorageLocation",
+						"fileName": "file-aitsi-ems-etl-20250328.zip"
+					},
+					"compression": {
+						"type": "ZipDeflate"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CMR_Source_Files')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_File_CMR",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureFileStorageLocation",
+						"fileName": "file-aitsi-ems-etl-20250311-10ROWS.zip"
+					},
+					"columnDelimiter": ",",
+					"compressionCodec": "ZipDeflate",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_ABL_BinaryECCI')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_FILE_ECCIS",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureFileStorageLocation"
+					},
+					"columnDelimiter": ",",
+					"compressionCodec": "ZipDeflate",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "InfluencerEventId",
+						"type": "String"
+					},
+					{
+						"name": "ApplicationId",
+						"type": "String"
+					},
+					{
+						"name": "EventId",
+						"type": "String"
+					},
+					{
+						"name": "IsActive",
+						"type": "String"
+					},
+					{
+						"name": "CreatedById",
+						"type": "String"
+					},
+					{
+						"name": "DateCreatedUTC",
+						"type": "String"
+					},
+					{
+						"name": "DateUpdatedUTC",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_BinaryECCI_Source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_FILE_ECCIS",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureFileStorageLocation"
+					},
+					"compression": {
+						"type": "ZipDeflate"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_ECCI_Destination')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_ECCI_V",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "ecci"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_InfluencerEvent')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_ECCI_V",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "InfluencerEvent.csv",
+						"folderPath": "file-aitsi-ecci-etl-20250109.zip",
+						"container": "ecci"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "InfluencerEventId",
+						"type": "String"
+					},
+					{
+						"name": "ApplicationId",
+						"type": "String"
+					},
+					{
+						"name": "EventId",
+						"type": "String"
+					},
+					{
+						"name": "IsActive",
+						"type": "String"
+					},
+					{
+						"name": "CreatedById",
+						"type": "String"
+					},
+					{
+						"name": "DateCreatedUTC",
+						"type": "String"
+					},
+					{
+						"name": "DateUpdatedUTC",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_aitsInfluencerEventReference')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_influencerId",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_eventContract",
+						"type": "nchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsInfluencerEventReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_aitsPerson')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "mcrissEthnicCategory",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mcrissGender",
+						"type": "nvarchar"
+					},
+					{
+						"name": "genderIsInferred",
+						"type": "bit"
+					},
+					{
+						"name": "mcrissRace",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mcrisRaceOtherDetail",
+						"type": "nvarchar"
+					},
+					{
+						"name": "age",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "yearOfBirth",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "monthOfBirth",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "namePrefix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "firstName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "lastName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "middleName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "nameSuffix",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentFulfillmentItem",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAttributedPromotion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAssignment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mcrissId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mcrissAcceptance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "environmentOfRecord",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "fk_locMcrcSchoolId",
+						"type": "nchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsPerson"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_aitsPersonContactEmailInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "char"
+					},
+					{
+						"name": "fk_contactEmailInfoId",
+						"type": "varchar"
+					},
+					{
+						"name": "fk_personId",
+						"type": "char"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "createdBy",
+						"type": "varchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "updatedBy",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsPersonContactEmailInfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_aitsaddressinfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "addressLine1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "addressLine2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "addressLine3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "archivedDate",
+						"type": "date"
+					},
+					{
+						"name": "city",
+						"type": "nvarchar"
+					},
+					{
+						"name": "county",
+						"type": "nvarchar"
+					},
+					{
+						"name": "isArchived",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isPrimary",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "latitude",
+						"type": "nvarchar"
+					},
+					{
+						"name": "longitude",
+						"type": "nvarchar"
+					},
+					{
+						"name": "optedOut",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "optedOutDate",
+						"type": "date"
+					},
+					{
+						"name": "stateLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusDate",
+						"type": "date"
+					},
+					{
+						"name": "statusReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "typeLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zipCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zipRoute",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGMT",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGMT",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsaddressinfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_aitscontactemailinfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "address",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "typeLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "validationDate",
+						"type": "date"
+					},
+					{
+						"name": "optedOutDate",
+						"type": "date"
+					},
+					{
+						"name": "optedOut",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isPrimary",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isArchived",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "distributionCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "archivedDate",
+						"type": "date"
+					},
+					{
+						"name": "statusDate",
+						"type": "date"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitscontactemailinfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_aitscontactphoneinfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "archivedDate",
+						"type": "date"
+					},
+					{
+						"name": "countryCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "extension",
+						"type": "nvarchar"
+					},
+					{
+						"name": "isArchived",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isPrimary",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "optedOut",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "optedOutDate",
+						"type": "date"
+					},
+					{
+						"name": "typeLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "validationDate",
+						"type": "date"
+					},
+					{
+						"name": "number",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitscontactphoneinfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_aitsinfluencer')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "hash",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_personId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "occupation",
+						"type": "nvarchar"
+					},
+					{
+						"name": "occupationOther",
+						"type": "nvarchar"
+					},
+					{
+						"name": "type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "interests",
+						"type": "nvarchar"
+					},
+					{
+						"name": "interestsOtherValue",
+						"type": "nvarchar"
+					},
+					{
+						"name": "referallSource",
+						"type": "nvarchar"
+					},
+					{
+						"name": "referallSourceOther",
+						"type": "nvarchar"
+					},
+					{
+						"name": "relationToUsmc",
+						"type": "nvarchar"
+					},
+					{
+						"name": "relationToUsmcOther",
+						"type": "nvarchar"
+					},
+					{
+						"name": "collegeAttended",
+						"type": "nvarchar"
+					},
+					{
+						"name": "organizationAffiliations",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAssignedBilletGroup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAssignmentMethod",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentAssignmentComments",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentSource",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentStatusReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mostRecentStatusDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "profileCompletedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "firstEmailDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "fiveDayEmailDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "tenDayEmailDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "reassignmentCount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "pendingArchiveEmailDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "fk_educationId",
+						"type": "nchar"
+					},
+					{
+						"name": "mostRecentAssignmentDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "homeTownCity",
+						"type": "nvarchar"
+					},
+					{
+						"name": "homeTownState",
+						"type": "nvarchar"
+					},
+					{
+						"name": "doNotContact",
+						"type": "bit"
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FK_LOC_UNIT_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "RANK",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsinfluencer"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_aitspersoncontactphoneinfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_personId",
+						"type": "nchar"
+					},
+					{
+						"name": "fk_contactPhoneInfoId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitspersoncontactphoneinfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_wk_ContainerData_Flattened')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_ECCI_V",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ECCI_Dataset"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "wk_ContainerData_Flattened.csv",
+						"folderPath": "file-aitsi-fluidforms-etl-20241212.zip",
+						"container": "ecci"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "PersonId",
+						"type": "String"
+					},
+					{
+						"name": "ContainerId",
+						"type": "String"
+					},
+					{
+						"name": "Address_Apt_Unit",
+						"type": "String"
+					},
+					{
+						"name": "Address_City",
+						"type": "String"
+					},
+					{
+						"name": "Address_State",
+						"type": "String"
+					},
+					{
+						"name": "Address_Street",
+						"type": "String"
+					},
+					{
+						"name": "Address_Zip",
+						"type": "String"
+					},
+					{
+						"name": "Advanced_Course_Name",
+						"type": "String"
+					},
+					{
+						"name": "Advanced_Course_Type",
+						"type": "String"
+					},
+					{
+						"name": "Advanced_Courses_Taken",
+						"type": "String"
+					},
+					{
+						"name": "Awards_Selector",
+						"type": "String"
+					},
+					{
+						"name": "College",
+						"type": "String"
+					},
+					{
+						"name": "Date_Attended",
+						"type": "String"
+					},
+					{
+						"name": "Date_of_Birth_Month",
+						"type": "String"
+					},
+					{
+						"name": "Date_of_Birth_Year",
+						"type": "String"
+					},
+					{
+						"name": "Disciplinary_Issues",
+						"type": "String"
+					},
+					{
+						"name": "Do_Not_Contact",
+						"type": "String"
+					},
+					{
+						"name": "Email",
+						"type": "String"
+					},
+					{
+						"name": "Email_list_opt_out",
+						"type": "String"
+					},
+					{
+						"name": "Ethnicity",
+						"type": "String"
+					},
+					{
+						"name": "Event_Attendance",
+						"type": "String"
+					},
+					{
+						"name": "Event_Attendance_Describe",
+						"type": "String"
+					},
+					{
+						"name": "Event_City",
+						"type": "String"
+					},
+					{
+						"name": "Event_State",
+						"type": "String"
+					},
+					{
+						"name": "Extracurricular_Activities",
+						"type": "String"
+					},
+					{
+						"name": "Extracurricular_Activities_Years",
+						"type": "String"
+					},
+					{
+						"name": "Extracurricular_Selector",
+						"type": "String"
+					},
+					{
+						"name": "First_Name",
+						"type": "String"
+					},
+					{
+						"name": "Gender",
+						"type": "String"
+					},
+					{
+						"name": "GPA_Scale",
+						"type": "String"
+					},
+					{
+						"name": "Grade_Level_Junior",
+						"type": "String"
+					},
+					{
+						"name": "Grade_Level_Junior_or_Sophomore",
+						"type": "String"
+					},
+					{
+						"name": "Graduation_Year",
+						"type": "String"
+					},
+					{
+						"name": "Homeschooled",
+						"type": "String"
+					},
+					{
+						"name": "Hometown_City",
+						"type": "String"
+					},
+					{
+						"name": "Hometown_State",
+						"type": "String"
+					},
+					{
+						"name": "Honors_Awards",
+						"type": "String"
+					},
+					{
+						"name": "Influencer_Opt_In",
+						"type": "String"
+					},
+					{
+						"name": "Interests",
+						"type": "String"
+					},
+					{
+						"name": "JROTC_Branch",
+						"type": "String"
+					},
+					{
+						"name": "JROTC_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Last_Name",
+						"type": "String"
+					},
+					{
+						"name": "Leadership_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Leadership_Years",
+						"type": "String"
+					},
+					{
+						"name": "Legal_Infraction",
+						"type": "String"
+					},
+					{
+						"name": "Legal_Resident",
+						"type": "String"
+					},
+					{
+						"name": "Letter_of_Recommendation_1",
+						"type": "String"
+					},
+					{
+						"name": "Marines_Opt_In",
+						"type": "String"
+					},
+					{
+						"name": "Nominee",
+						"type": "String"
+					},
+					{
+						"name": "Nominee_Relationship",
+						"type": "String"
+					},
+					{
+						"name": "Occupation",
+						"type": "String"
+					},
+					{
+						"name": "Other_Courses",
+						"type": "String"
+					},
+					{
+						"name": "Other_Interests",
+						"type": "String"
+					},
+					{
+						"name": "Other_Marines_Relationship_Type",
+						"type": "String"
+					},
+					{
+						"name": "Other_Nominee_Relationship",
+						"type": "String"
+					},
+					{
+						"name": "Other_Occuptation",
+						"type": "String"
+					},
+					{
+						"name": "Other_Sports",
+						"type": "String"
+					},
+					{
+						"name": "Phone_Number",
+						"type": "String"
+					},
+					{
+						"name": "Poolee_Academy_NROTC",
+						"type": "String"
+					},
+					{
+						"name": "Poolee_Academy_NROTC_Delayed_Entry_Program",
+						"type": "String"
+					},
+					{
+						"name": "Referral",
+						"type": "String"
+					},
+					{
+						"name": "Referral_Other",
+						"type": "String"
+					},
+					{
+						"name": "Relationship_to_Marines",
+						"type": "String"
+					},
+					{
+						"name": "School_Name",
+						"type": "String"
+					},
+					{
+						"name": "School_Community_Leadership",
+						"type": "String"
+					},
+					{
+						"name": "SIPRM_Username",
+						"type": "String"
+					},
+					{
+						"name": "SLCDA_Referral",
+						"type": "String"
+					},
+					{
+						"name": "Source",
+						"type": "String"
+					},
+					{
+						"name": "Sports_JV_Varsity",
+						"type": "String"
+					},
+					{
+						"name": "Sports_Played",
+						"type": "String"
+					},
+					{
+						"name": "Sports_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Sports_Years_Played",
+						"type": "String"
+					},
+					{
+						"name": "Team_Captain",
+						"type": "String"
+					},
+					{
+						"name": "Team_Captain_Describe",
+						"type": "String"
+					},
+					{
+						"name": "Visible_Tattoos",
+						"type": "String"
+					},
+					{
+						"name": "Volunteer_Hours_Week",
+						"type": "String"
+					},
+					{
+						"name": "Volunteer_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Volunteer_Work",
+						"type": "String"
+					},
+					{
+						"name": "Work_Experience",
+						"type": "String"
+					},
+					{
+						"name": "Work_Selector",
+						"type": "String"
+					},
+					{
+						"name": "Work_Years",
+						"type": "String"
+					},
+					{
+						"name": "DateCreatedUTC",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ECCI_Zip_Files')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_ECCI",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "ecci"
+					},
+					"columnDelimiter": ",",
+					"compressionCodec": null,
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "PK\u0003\u0004\u0014\u0000\u0000\u0000\b\u0000ٛxX/��G\bP\f\u0000R�\u001e\u0000 \u0000\u0000\u0000File-AITS1-ECCI-DEV-20240324.csv��[s�H�&�~\"�����\u0011�+��\u0017%\u0012��*I�H���~�HX�M�\u001a^�VU�?�J�\u0014AR��{\u000egw�E\u0002$2s�Z߷r]������p�\u0013��J*�\u00171�9c\\\u0017E�\u000b���F��",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EcciInfluencerAssignmentHistory')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FK_INFLUENCER_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "FK_LOC_UNIT_ID",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CREATED_ON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "UPDATED_BY",
+						"type": "nvarchar"
+					},
+					{
+						"name": "UPDATED_ON",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ECCI_INFLUENCER_ASSIGNMENT_HISTORY"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EventReport')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_CMR",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "EventReport.csv",
+						"folderPath": "file-aitsi-ems-etl-20250328.zip",
+						"container": "cmr"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\"",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "id",
+						"type": "String"
+					},
+					{
+						"name": "userId",
+						"type": "String"
+					},
+					{
+						"name": "eventId",
+						"type": "String"
+					},
+					{
+						"name": "approverId",
+						"type": "String"
+					},
+					{
+						"name": "approvalDue",
+						"type": "String"
+					},
+					{
+						"name": "status",
+						"type": "String"
+					},
+					{
+						"name": "subStatus",
+						"type": "String"
+					},
+					{
+						"name": "attendance",
+						"type": "String"
+					},
+					{
+						"name": "marinesAttendance",
+						"type": "String"
+					},
+					{
+						"name": "leadCards",
+						"type": "String"
+					},
+					{
+						"name": "attended",
+						"type": "String"
+					},
+					{
+						"name": "interviewsScheduled",
+						"type": "String"
+					},
+					{
+						"name": "recruiter",
+						"type": "String"
+					},
+					{
+						"name": "electricity",
+						"type": "String"
+					},
+					{
+						"name": "accommodating",
+						"type": "String"
+					},
+					{
+						"name": "recommend",
+						"type": "String"
+					},
+					{
+						"name": "emvAttend",
+						"type": "String"
+					},
+					{
+						"name": "recommendReason",
+						"type": "String"
+					},
+					{
+						"name": "deliverable",
+						"type": "String"
+					},
+					{
+						"name": "description",
+						"type": "String"
+					},
+					{
+						"name": "objective",
+						"type": "String"
+					},
+					{
+						"name": "behavior",
+						"type": "String"
+					},
+					{
+						"name": "awareness",
+						"type": "String"
+					},
+					{
+						"name": "engagements",
+						"type": "String"
+					},
+					{
+						"name": "mediaPosts",
+						"type": "String"
+					},
+					{
+						"name": "mediaImpressions",
+						"type": "String"
+					},
+					{
+						"name": "socialMediaPosts",
+						"type": "String"
+					},
+					{
+						"name": "socialMediaImpressions",
+						"type": "String"
+					},
+					{
+						"name": "qualifiedLeads",
+						"type": "String"
+					},
+					{
+						"name": "influencerContacts",
+						"type": "String"
+					},
+					{
+						"name": "followUps",
+						"type": "String"
+					},
+					{
+						"name": "interaction",
+						"type": "String"
+					},
+					{
+						"name": "influencerInteraction",
+						"type": "String"
+					},
+					{
+						"name": "onsiteActivations",
+						"type": "String"
+					},
+					{
+						"name": "targetMarketRating",
+						"type": "String"
+					},
+					{
+						"name": "targetMarketComments",
+						"type": "String"
+					},
+					{
+						"name": "estimatedAttendance",
+						"type": "String"
+					},
+					{
+						"name": "estimatedTargetAttendance",
+						"type": "String"
+					},
+					{
+						"name": "comingOfAgeRating",
+						"type": "String"
+					},
+					{
+						"name": "comingOfAgeComments",
+						"type": "String"
+					},
+					{
+						"name": "influentialRating",
+						"type": "String"
+					},
+					{
+						"name": "influentialComments",
+						"type": "String"
+					},
+					{
+						"name": "communityRelationsRating",
+						"type": "String"
+					},
+					{
+						"name": "communityRelationsComments",
+						"type": "String"
+					},
+					{
+						"name": "leadGenerationRating",
+						"type": "String"
+					},
+					{
+						"name": "leadGenerationComments",
+						"type": "String"
+					},
+					{
+						"name": "keyParticipants",
+						"type": "String"
+					},
+					{
+						"name": "problems",
+						"type": "String"
+					},
+					{
+						"name": "concerns",
+						"type": "String"
+					},
+					{
+						"name": "comments",
+						"type": "String"
+					},
+					{
+						"name": "approvedDistrictName",
+						"type": "String"
+					},
+					{
+						"name": "approvedRecruitingStationName",
+						"type": "String"
+					},
+					{
+						"name": "approvingUser",
+						"type": "String"
+					},
+					{
+						"name": "approvingBillet",
+						"type": "String"
+					},
+					{
+						"name": "approvingLocation",
+						"type": "String"
+					},
+					{
+						"name": "createdById",
+						"type": "String"
+					},
+					{
+						"name": "createdByUsername",
+						"type": "String"
+					},
+					{
+						"name": "updatedById",
+						"type": "String"
+					},
+					{
+						"name": "updatedByUsername",
+						"type": "String"
+					},
+					{
+						"name": "createdAt",
+						"type": "String"
+					},
+					{
+						"name": "updatedAt",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/aitsAddressInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "addressLine1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "addressLine2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "addressLine3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "archivedDate",
+						"type": "date"
+					},
+					{
+						"name": "city",
+						"type": "nvarchar"
+					},
+					{
+						"name": "county",
+						"type": "nvarchar"
+					},
+					{
+						"name": "isArchived",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isPrimary",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "latitude",
+						"type": "nvarchar"
+					},
+					{
+						"name": "longitude",
+						"type": "nvarchar"
+					},
+					{
+						"name": "optedOut",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "optedOutDate",
+						"type": "date"
+					},
+					{
+						"name": "stateLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusDate",
+						"type": "date"
+					},
+					{
+						"name": "statusReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "typeLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zipCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zipRoute",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGMT",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGMT",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsaddressinfo"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

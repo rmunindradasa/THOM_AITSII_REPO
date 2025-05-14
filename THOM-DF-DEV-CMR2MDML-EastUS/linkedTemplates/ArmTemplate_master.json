@@ -1,0 +1,250 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "THOM-DF-DEV-CMR2MDML-EastUS"
+		},
+		"AzureBlobStorage11_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage11'"
+		},
+		"AzureFileStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureFileStorage1'"
+		},
+		"CMR_Dest1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CMR_Dest1'"
+		},
+		"LS_ABLB_CMR_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABLB_CMR'"
+		},
+		"LS_ABLB_ECCI_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABLB_ECCI'"
+		},
+		"LS_ABLB_ECCIV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABLB_ECCIV'"
+		},
+		"LS_ABLB_ECCI_V_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_ABLB_ECCI_V'"
+		},
+		"LS_FILE_ECCI_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_FILE_ECCI'"
+		},
+		"LS_FILE_ECCIS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_FILE_ECCIS'"
+		},
+		"LS_File_CMR_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_File_CMR'"
+		},
+		"LS_File_CMR1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_File_CMR1'"
+		},
+		"LS_Fileshare_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_Fileshare'"
+		},
+		"LS_SQL_MDML_DMSandbox_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_SQL_MDML_DMSandbox'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=usmcdevdb.database.windows.net;Initial Catalog=MDML_DMSandbox"
+		},
+		"VML_BLOB_DEV_MDML_EastUS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'VML_BLOB_DEV_MDML_EastUS'"
+		},
+		"dev_sandbox_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'dev_sandbox'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=usmcdevdb.database.windows.net;Initial Catalog=MDML_DMSandbox"
+		},
+		"LS_SQL_MDML_DEV_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuresql-etl20240819.database.windows.net"
+		},
+		"LS_SQL_MDML_DEV_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "THOM-DB-DEV-MDML-EastUS"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/71c8d1a1-6097-48a4-90c9-b9fae74f4551/resourceGroups/WTRG/providers/Microsoft.Storage/storageAccounts/usmcdevfiles"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage11_connectionString": {
+						"value": "[parameters('AzureBlobStorage11_connectionString')]"
+					},
+					"AzureFileStorage1_connectionString": {
+						"value": "[parameters('AzureFileStorage1_connectionString')]"
+					},
+					"CMR_Dest1_connectionString": {
+						"value": "[parameters('CMR_Dest1_connectionString')]"
+					},
+					"LS_ABLB_CMR_connectionString": {
+						"value": "[parameters('LS_ABLB_CMR_connectionString')]"
+					},
+					"LS_ABLB_ECCI_connectionString": {
+						"value": "[parameters('LS_ABLB_ECCI_connectionString')]"
+					},
+					"LS_ABLB_ECCIV_connectionString": {
+						"value": "[parameters('LS_ABLB_ECCIV_connectionString')]"
+					},
+					"LS_ABLB_ECCI_V_connectionString": {
+						"value": "[parameters('LS_ABLB_ECCI_V_connectionString')]"
+					},
+					"LS_FILE_ECCI_connectionString": {
+						"value": "[parameters('LS_FILE_ECCI_connectionString')]"
+					},
+					"LS_FILE_ECCIS_connectionString": {
+						"value": "[parameters('LS_FILE_ECCIS_connectionString')]"
+					},
+					"LS_File_CMR_connectionString": {
+						"value": "[parameters('LS_File_CMR_connectionString')]"
+					},
+					"LS_File_CMR1_connectionString": {
+						"value": "[parameters('LS_File_CMR1_connectionString')]"
+					},
+					"LS_Fileshare_connectionString": {
+						"value": "[parameters('LS_Fileshare_connectionString')]"
+					},
+					"LS_SQL_MDML_DMSandbox_connectionString": {
+						"value": "[parameters('LS_SQL_MDML_DMSandbox_connectionString')]"
+					},
+					"VML_BLOB_DEV_MDML_EastUS_connectionString": {
+						"value": "[parameters('VML_BLOB_DEV_MDML_EastUS_connectionString')]"
+					},
+					"dev_sandbox_connectionString": {
+						"value": "[parameters('dev_sandbox_connectionString')]"
+					},
+					"LS_SQL_MDML_DEV_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_MDML_DEV_properties_typeProperties_server')]"
+					},
+					"LS_SQL_MDML_DEV_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_MDML_DEV_properties_typeProperties_database')]"
+					},
+					"trigger1_properties_typeProperties_scope": {
+						"value": "[parameters('trigger1_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'THOM-DF-DEV-CMR2MDML-EastUS_ArmTemplate_3')]"
+			]
+		}
+	]
+}
