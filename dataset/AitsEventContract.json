@@ -2,7 +2,7 @@
 	"name": "AitsEventContract",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_SQL_MDML_DEV",
+			"referenceName": "LS_SQL_MDML_DMSandbox",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
