@@ -6093,7 +6093,7 @@
 						"     errorHandlingOption: 'stopOnFirstError',",
 						"     mapColumn(",
 						"          id = guid,",
-						"          aitsBaselineId = id,",
+						"          aitsBaselineId = parentId,",
 						"          deliverables = deliverable,",
 						"          additionalDeliverables = addlDeliverables,",
 						"          dateContractSigned = dateContractedSigned,",
