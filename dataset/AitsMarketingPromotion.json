@@ -1,0 +1,106 @@
+{
+	"name": "AitsMarketingPromotion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_MDML_DMSandbox",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nchar"
+			},
+			{
+				"name": "aitsBaselineId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fk_marketingCampaignId",
+				"type": "nchar"
+			},
+			{
+				"name": "name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "statusLookup",
+				"type": "nvarchar"
+			},
+			{
+				"name": "startDateGmt",
+				"type": "date"
+			},
+			{
+				"name": "endDateGmt",
+				"type": "date"
+			},
+			{
+				"name": "isRecurrence",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "isWebFacing",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "submitter",
+				"type": "nvarchar"
+			},
+			{
+				"name": "submitterFormatted",
+				"type": "nvarchar"
+			},
+			{
+				"name": "submittedDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "shortDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "detailedDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "landingPageUriAfterPromo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "landingPageUriDuringPromo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "fk_reviewId",
+				"type": "nchar"
+			},
+			{
+				"name": "createdBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "createdDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "updatedBy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "updatedDateGmt",
+				"type": "datetime2",
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "aitsMarketingPromotion"
+		}
+	}
+}

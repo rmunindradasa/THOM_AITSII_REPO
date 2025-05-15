@@ -13,6 +13,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "CMR"
+				},
+				{
+					"dataset": {
+						"referenceName": "AitsMarketingPromotion",
+						"type": "DatasetReference"
+					},
+					"name": "AitsMarketingPromotion"
 				}
 			],
 			"sinks": [
@@ -31,6 +38,9 @@
 				},
 				{
 					"name": "Upsert"
+				},
+				{
+					"name": "JoinMarketingPromotion"
 				}
 			],
 			"scriptLines": [
@@ -113,10 +123,42 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     multiLineRow: true) ~> CMR",
-				"CMR derive(guid = uuid(),",
+				"source(output(",
+				"          id as string,",
+				"          aitsBaselineId as string,",
+				"          fk_marketingCampaignId as string,",
+				"          name as string,",
+				"          statusLookup as string,",
+				"          startDateGmt as date,",
+				"          endDateGmt as date,",
+				"          isRecurrence as integer,",
+				"          isWebFacing as integer,",
+				"          submitter as string,",
+				"          submitterFormatted as string,",
+				"          submittedDateGmt as timestamp,",
+				"          shortDescription as string,",
+				"          detailedDescription as string,",
+				"          landingPageUriAfterPromo as string,",
+				"          landingPageUriDuringPromo as string,",
+				"          fk_reviewId as string,",
+				"          createdBy as string,",
+				"          createdDateGmt as timestamp,",
+				"          updatedBy as string,",
+				"          updatedDateGmt as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> AitsMarketingPromotion",
+				"JoinMarketingPromotion derive(guid = uuid(),",
 				"          CreateDate = currentTimestamp(),",
 				"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
 				"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
+				"CMR, AitsMarketingPromotion join(CMR@id == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinMarketingPromotion",
 				"Upsert sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -219,7 +261,8 @@
 				"          createdBy = createdByUsername,",
 				"          updatedBy = updatedByUsername,",
 				"          createdDateGmt = createdAt,",
-				"          updatedDateGmt = updatedAt",
+				"          updatedDateGmt = updatedAt,",
+				"          fk_promotionId = CMR@id",
 				"     )) ~> aitsEventContract"
 			]
 		}
