@@ -165,8 +165,10 @@
 								},
 								"datasetParameters": {
 									"CMR": {},
+									"AitsMarketingPromotion": {},
 									"aitsEventContract": {}
-								}
+								},
+								"linkedServiceParameters": {}
 							},
 							"staging": {},
 							"compute": {
@@ -5914,6 +5916,13 @@
 								"type": "DatasetReference"
 							},
 							"name": "CMR"
+						},
+						{
+							"dataset": {
+								"referenceName": "AitsMarketingPromotion",
+								"type": "DatasetReference"
+							},
+							"name": "AitsMarketingPromotion"
 						}
 					],
 					"sinks": [
@@ -5932,6 +5941,9 @@
 						},
 						{
 							"name": "Upsert"
+						},
+						{
+							"name": "JoinMarketingPromotion"
 						}
 					],
 					"scriptLines": [
@@ -6014,10 +6026,42 @@
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false,",
 						"     multiLineRow: true) ~> CMR",
-						"CMR derive(guid = uuid(),",
+						"source(output(",
+						"          id as string,",
+						"          aitsBaselineId as string,",
+						"          fk_marketingCampaignId as string,",
+						"          name as string,",
+						"          statusLookup as string,",
+						"          startDateGmt as date,",
+						"          endDateGmt as date,",
+						"          isRecurrence as integer,",
+						"          isWebFacing as integer,",
+						"          submitter as string,",
+						"          submitterFormatted as string,",
+						"          submittedDateGmt as timestamp,",
+						"          shortDescription as string,",
+						"          detailedDescription as string,",
+						"          landingPageUriAfterPromo as string,",
+						"          landingPageUriDuringPromo as string,",
+						"          fk_reviewId as string,",
+						"          createdBy as string,",
+						"          createdDateGmt as timestamp,",
+						"          updatedBy as string,",
+						"          updatedDateGmt as timestamp",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     isolationLevel: 'READ_UNCOMMITTED',",
+						"     format: 'table') ~> AitsMarketingPromotion",
+						"JoinMarketingPromotion derive(guid = uuid(),",
 						"          CreateDate = currentTimestamp(),",
 						"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
 						"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
+						"CMR, AitsMarketingPromotion join(CMR@id == aitsBaselineId,",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> JoinMarketingPromotion",
 						"Upsert sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
@@ -6120,13 +6164,15 @@
 						"          createdBy = createdByUsername,",
 						"          updatedBy = updatedByUsername,",
 						"          createdDateGmt = createdAt,",
-						"          updatedDateGmt = updatedAt",
+						"          updatedDateGmt = updatedAt,",
+						"          fk_promotionId = CMR@id",
 						"     )) ~> aitsEventContract"
 					]
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/CMR_Dest')]",
+				"[concat(variables('factoryId'), '/datasets/AitsMarketingPromotion')]",
 				"[concat(variables('factoryId'), '/datasets/AitsEventContract')]"
 			]
 		},
@@ -9403,6 +9449,117 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_wk_ContainerData_Flattened')]",
 				"[concat(variables('factoryId'), '/datasets/aitsPersonContactPhoneInfo')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AitsMarketingPromotion')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_marketingCampaignId",
+						"type": "nchar"
+					},
+					{
+						"name": "name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "startDateGmt",
+						"type": "date"
+					},
+					{
+						"name": "endDateGmt",
+						"type": "date"
+					},
+					{
+						"name": "isRecurrence",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isWebFacing",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "submitter",
+						"type": "nvarchar"
+					},
+					{
+						"name": "submitterFormatted",
+						"type": "nvarchar"
+					},
+					{
+						"name": "submittedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "shortDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "detailedDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "landingPageUriAfterPromo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "landingPageUriDuringPromo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_reviewId",
+						"type": "nchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsMarketingPromotion"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_SQL_MDML_DMSandbox')]"
 			]
 		}
 	]
