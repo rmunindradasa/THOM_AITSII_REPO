@@ -154,7 +154,7 @@
 				"          CreateDate = currentTimestamp(),",
 				"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
 				"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
-				"CMR, AitsMarketingPromotion join(CMR@id == ERROR_FUNCTION(''),",
+				"CMR, AitsMarketingPromotion join(CMR@id == aitsBaselineId,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
