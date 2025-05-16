@@ -20,6 +20,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "AitsMarketingPromotion"
+				},
+				{
+					"dataset": {
+						"referenceName": "loc_mcrc_unit",
+						"type": "DatasetReference"
+					},
+					"name": "LocMcrcUnit"
 				}
 			],
 			"sinks": [
@@ -41,6 +48,9 @@
 				},
 				{
 					"name": "JoinMarketingPromotion"
+				},
+				{
+					"name": "joinLocMcrcUnit"
 				}
 			],
 			"scriptLines": [
@@ -150,7 +160,25 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> AitsMarketingPromotion",
-				"JoinMarketingPromotion derive(guid = uuid(),",
+				"source(output(",
+				"          ID as string,",
+				"          NAME_FULL as string,",
+				"          NAME_SHORT as string,",
+				"          FK_TYPE_ID as string,",
+				"          FK_PARENT_UNIT_ID as string,",
+				"          CREATED_BY as string,",
+				"          CREATED_DATE_TIME as timestamp,",
+				"          UPDATED_BY as string,",
+				"          UPDATED_DATE_TIME as timestamp,",
+				"          AITS_BASELINE_ID as string,",
+				"          APPIAN_GROUP_ID as string,",
+				"          IS_ACTIVE as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> LocMcrcUnit",
+				"joinLocMcrcUnit derive(guid = uuid(),",
 				"          CreateDate = currentTimestamp(),",
 				"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
 				"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
@@ -159,6 +187,11 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> JoinMarketingPromotion",
+				"JoinMarketingPromotion, LocMcrcUnit join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinLocMcrcUnit",
 				"Upsert sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
