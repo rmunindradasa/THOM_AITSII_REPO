@@ -234,7 +234,7 @@
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          id = guid,",
-				"          aitsBaselineId = parentId,",
+				"          fk_parentEventContractId = parentId,",
 				"          deliverables = deliverable,",
 				"          additionalDeliverables = addlDeliverables,",
 				"          dateContractSigned = dateContractedSigned,",
@@ -262,7 +262,8 @@
 				"          updatedBy = updatedByUsername,",
 				"          createdDateGmt = createdAt,",
 				"          updatedDateGmt = updatedAt,",
-				"          fk_promotionId = AitsMarketingPromotion@id",
+				"          fk_promotionId = AitsMarketingPromotion@id,",
+				"          aitsBaselineId = CMR@id",
 				"     )) ~> aitsEventContract"
 			]
 		}
