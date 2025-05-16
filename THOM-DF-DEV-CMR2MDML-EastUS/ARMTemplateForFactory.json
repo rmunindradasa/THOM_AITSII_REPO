@@ -6168,7 +6168,7 @@
 						"          CreatedBy = 'AzurePipeline') ~> DerivedColumns",
 						"DerivedColumns alterRow(upsertIf(true())) ~> Upsert",
 						"CMR, AitsMarketingPromotion join(CMR@id == aitsBaselineId,",
-						"     joinType:'inner',",
+						"     joinType:'left',",
 						"     matchType:'exact',",
 						"     ignoreSpaces: false,",
 						"     broadcast: 'auto')~> JoinMarketingPromotion",
