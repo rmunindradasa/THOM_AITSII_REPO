@@ -262,7 +262,7 @@
 				"          updatedBy = updatedByUsername,",
 				"          createdDateGmt = createdAt,",
 				"          updatedDateGmt = updatedAt,",
-				"          fk_promotionId = CMR@id",
+				"          fk_promotionId = AitsMarketingPromotion@id",
 				"     )) ~> aitsEventContract"
 			]
 		}
