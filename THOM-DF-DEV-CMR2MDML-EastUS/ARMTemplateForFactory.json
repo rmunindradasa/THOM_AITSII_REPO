@@ -167,8 +167,7 @@
 									"CMR": {},
 									"AitsMarketingPromotion": {},
 									"aitsEventContract": {}
-								},
-								"linkedServiceParameters": {}
+								}
 							},
 							"staging": {},
 							"compute": {
@@ -1784,6 +1783,117 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "aitsEventContract"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_SQL_MDML_DMSandbox')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AitsMarketingPromotion')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_marketingCampaignId",
+						"type": "nchar"
+					},
+					{
+						"name": "name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "startDateGmt",
+						"type": "date"
+					},
+					{
+						"name": "endDateGmt",
+						"type": "date"
+					},
+					{
+						"name": "isRecurrence",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isWebFacing",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "submitter",
+						"type": "nvarchar"
+					},
+					{
+						"name": "submitterFormatted",
+						"type": "nvarchar"
+					},
+					{
+						"name": "submittedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "shortDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "detailedDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "landingPageUriAfterPromo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "landingPageUriDuringPromo",
+						"type": "nvarchar"
+					},
+					{
+						"name": "fk_reviewId",
+						"type": "nchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGmt",
+						"type": "datetime2",
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsMarketingPromotion"
 				}
 			},
 			"dependsOn": [
@@ -6165,7 +6275,7 @@
 						"          updatedBy = updatedByUsername,",
 						"          createdDateGmt = createdAt,",
 						"          updatedDateGmt = updatedAt,",
-						"          fk_promotionId = CMR@id",
+						"          fk_promotionId = AitsMarketingPromotion@id",
 						"     )) ~> aitsEventContract"
 					]
 				}
@@ -9449,117 +9559,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_wk_ContainerData_Flattened')]",
 				"[concat(variables('factoryId'), '/datasets/aitsPersonContactPhoneInfo')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AitsMarketingPromotion')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_SQL_MDML_DMSandbox",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "id",
-						"type": "nchar"
-					},
-					{
-						"name": "aitsBaselineId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "fk_marketingCampaignId",
-						"type": "nchar"
-					},
-					{
-						"name": "name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "statusLookup",
-						"type": "nvarchar"
-					},
-					{
-						"name": "startDateGmt",
-						"type": "date"
-					},
-					{
-						"name": "endDateGmt",
-						"type": "date"
-					},
-					{
-						"name": "isRecurrence",
-						"type": "smallint",
-						"precision": 5
-					},
-					{
-						"name": "isWebFacing",
-						"type": "smallint",
-						"precision": 5
-					},
-					{
-						"name": "submitter",
-						"type": "nvarchar"
-					},
-					{
-						"name": "submitterFormatted",
-						"type": "nvarchar"
-					},
-					{
-						"name": "submittedDateGmt",
-						"type": "datetime2",
-						"scale": 0
-					},
-					{
-						"name": "shortDescription",
-						"type": "nvarchar"
-					},
-					{
-						"name": "detailedDescription",
-						"type": "nvarchar"
-					},
-					{
-						"name": "landingPageUriAfterPromo",
-						"type": "nvarchar"
-					},
-					{
-						"name": "landingPageUriDuringPromo",
-						"type": "nvarchar"
-					},
-					{
-						"name": "fk_reviewId",
-						"type": "nchar"
-					},
-					{
-						"name": "createdBy",
-						"type": "nvarchar"
-					},
-					{
-						"name": "createdDateGmt",
-						"type": "datetime2",
-						"scale": 0
-					},
-					{
-						"name": "updatedBy",
-						"type": "nvarchar"
-					},
-					{
-						"name": "updatedDateGmt",
-						"type": "datetime2",
-						"scale": 0
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "aitsMarketingPromotion"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_SQL_MDML_DMSandbox')]"
 			]
 		}
 	]

@@ -13,6 +13,131 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/aitsAddressInfo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_SQL_MDML_DMSandbox",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nchar"
+					},
+					{
+						"name": "addressLine1",
+						"type": "nvarchar"
+					},
+					{
+						"name": "addressLine2",
+						"type": "nvarchar"
+					},
+					{
+						"name": "addressLine3",
+						"type": "nvarchar"
+					},
+					{
+						"name": "archivedDate",
+						"type": "date"
+					},
+					{
+						"name": "city",
+						"type": "nvarchar"
+					},
+					{
+						"name": "county",
+						"type": "nvarchar"
+					},
+					{
+						"name": "isArchived",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "isPrimary",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "latitude",
+						"type": "nvarchar"
+					},
+					{
+						"name": "longitude",
+						"type": "nvarchar"
+					},
+					{
+						"name": "optedOut",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "optedOutDate",
+						"type": "date"
+					},
+					{
+						"name": "stateLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "statusDate",
+						"type": "date"
+					},
+					{
+						"name": "statusReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "typeLookup",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zipCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zipRoute",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "createdDateGMT",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "updatedBy",
+						"type": "nvarchar"
+					},
+					{
+						"name": "updatedDateGMT",
+						"type": "datetime2",
+						"scale": 0
+					},
+					{
+						"name": "aitsBaselineId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "aitsaddressinfo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/aitsContactEmailInfo')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1462,115 +1587,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AitsMarketingPromotion')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_SQL_MDML_DMSandbox",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "id",
-						"type": "nchar"
-					},
-					{
-						"name": "aitsBaselineId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "fk_marketingCampaignId",
-						"type": "nchar"
-					},
-					{
-						"name": "name",
-						"type": "nvarchar"
-					},
-					{
-						"name": "statusLookup",
-						"type": "nvarchar"
-					},
-					{
-						"name": "startDateGmt",
-						"type": "date"
-					},
-					{
-						"name": "endDateGmt",
-						"type": "date"
-					},
-					{
-						"name": "isRecurrence",
-						"type": "smallint",
-						"precision": 5
-					},
-					{
-						"name": "isWebFacing",
-						"type": "smallint",
-						"precision": 5
-					},
-					{
-						"name": "submitter",
-						"type": "nvarchar"
-					},
-					{
-						"name": "submitterFormatted",
-						"type": "nvarchar"
-					},
-					{
-						"name": "submittedDateGmt",
-						"type": "datetime2",
-						"scale": 0
-					},
-					{
-						"name": "shortDescription",
-						"type": "nvarchar"
-					},
-					{
-						"name": "detailedDescription",
-						"type": "nvarchar"
-					},
-					{
-						"name": "landingPageUriAfterPromo",
-						"type": "nvarchar"
-					},
-					{
-						"name": "landingPageUriDuringPromo",
-						"type": "nvarchar"
-					},
-					{
-						"name": "fk_reviewId",
-						"type": "nchar"
-					},
-					{
-						"name": "createdBy",
-						"type": "nvarchar"
-					},
-					{
-						"name": "createdDateGmt",
-						"type": "datetime2",
-						"scale": 0
-					},
-					{
-						"name": "updatedBy",
-						"type": "nvarchar"
-					},
-					{
-						"name": "updatedDateGmt",
-						"type": "datetime2",
-						"scale": 0
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "aitsMarketingPromotion"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/THOM-Pipe-DEV-ECCI2MDML-EastUS-Unzip')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2318,14 +2334,12 @@
 						"          updatedBy = updatedByUsername,",
 						"          createdDateGmt = createdAt,",
 						"          updatedDateGmt = updatedAt,",
-						"          fk_promotionId = CMR@id",
+						"          fk_promotionId = AitsMarketingPromotion@id",
 						"     )) ~> aitsEventContract"
 					]
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/AitsMarketingPromotion')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/THOM_DataFlow_DEV_ECCI2MDML_EastUS_EcciInfluencerAssignmentHistory')]",

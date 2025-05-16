@@ -13,6 +13,315 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/CMR_Dest')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_ABLB_CMR",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Event.csv",
+						"folderPath": "file-aitsi-ems-etl-20250328.zip",
+						"container": "cmr"
+					},
+					"columnDelimiter": ",",
+					"rowDelimiter": "\n",
+					"escapeChar": "\"",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "id",
+						"type": "String"
+					},
+					{
+						"name": "parentId",
+						"type": "String"
+					},
+					{
+						"name": "name",
+						"type": "String"
+					},
+					{
+						"name": "cost",
+						"type": "String"
+					},
+					{
+						"name": "dateContractedSigned",
+						"type": "String"
+					},
+					{
+						"name": "eacCode",
+						"type": "String"
+					},
+					{
+						"name": "approverId",
+						"type": "String"
+					},
+					{
+						"name": "approvalDue",
+						"type": "String"
+					},
+					{
+						"name": "regionCode",
+						"type": "String"
+					},
+					{
+						"name": "districtCode",
+						"type": "String"
+					},
+					{
+						"name": "recruitingStationCode",
+						"type": "String"
+					},
+					{
+						"name": "recruitingSubStationCode",
+						"type": "String"
+					},
+					{
+						"name": "ossCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingRegionCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingDistrictCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingRecruitingStationCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingRecruitingSubStationCode",
+						"type": "String"
+					},
+					{
+						"name": "fundingOssCode",
+						"type": "String"
+					},
+					{
+						"name": "qualifiedName",
+						"type": "String"
+					},
+					{
+						"name": "sourceCode",
+						"type": "String"
+					},
+					{
+						"name": "fiscalYear",
+						"type": "String"
+					},
+					{
+						"name": "city",
+						"type": "String"
+					},
+					{
+						"name": "state",
+						"type": "String"
+					},
+					{
+						"name": "startDate",
+						"type": "String"
+					},
+					{
+						"name": "endDate",
+						"type": "String"
+					},
+					{
+						"name": "customCategory",
+						"type": "String"
+					},
+					{
+						"name": "type",
+						"type": "String"
+					},
+					{
+						"name": "status",
+						"type": "String"
+					},
+					{
+						"name": "subStatus",
+						"type": "String"
+					},
+					{
+						"name": "isFromPr",
+						"type": "String"
+					},
+					{
+						"name": "isFromEac",
+						"type": "String"
+					},
+					{
+						"name": "contract",
+						"type": "String"
+					},
+					{
+						"name": "schoolName",
+						"type": "String"
+					},
+					{
+						"name": "raoUsername",
+						"type": "String"
+					},
+					{
+						"name": "rejectComments",
+						"type": "String"
+					},
+					{
+						"name": "approvedDistrictName",
+						"type": "String"
+					},
+					{
+						"name": "approvedRecruitingStationName",
+						"type": "String"
+					},
+					{
+						"name": "approvedRecruitingSubStationName",
+						"type": "String"
+					},
+					{
+						"name": "approvingUser",
+						"type": "String"
+					},
+					{
+						"name": "approvingBillet",
+						"type": "String"
+					},
+					{
+						"name": "approvingLocation",
+						"type": "String"
+					},
+					{
+						"name": "purpose",
+						"type": "String"
+					},
+					{
+						"name": "estAttendance",
+						"type": "String"
+					},
+					{
+						"name": "behavior",
+						"type": "String"
+					},
+					{
+						"name": "awareness",
+						"type": "String"
+					},
+					{
+						"name": "estEngagements",
+						"type": "String"
+					},
+					{
+						"name": "estMediaPosts",
+						"type": "String"
+					},
+					{
+						"name": "estMediaImpressions",
+						"type": "String"
+					},
+					{
+						"name": "estSocialMediaPosts",
+						"type": "String"
+					},
+					{
+						"name": "estSocialMediaImpressions",
+						"type": "String"
+					},
+					{
+						"name": "estQualifiedLeads",
+						"type": "String"
+					},
+					{
+						"name": "estInfluencerContacts",
+						"type": "String"
+					},
+					{
+						"name": "estFollowUps",
+						"type": "String"
+					},
+					{
+						"name": "estInteraction",
+						"type": "String"
+					},
+					{
+						"name": "estInfluencerInteraction",
+						"type": "String"
+					},
+					{
+						"name": "estOnsiteActivations",
+						"type": "String"
+					},
+					{
+						"name": "deliverable",
+						"type": "String"
+					},
+					{
+						"name": "addlDeliverables",
+						"type": "String"
+					},
+					{
+						"name": "recommend",
+						"type": "String"
+					},
+					{
+						"name": "emvAttend",
+						"type": "String"
+					},
+					{
+						"name": "recommendReason",
+						"type": "String"
+					},
+					{
+						"name": "assignedBy",
+						"type": "String"
+					},
+					{
+						"name": "oldCategory",
+						"type": "String"
+					},
+					{
+						"name": "oldEventId",
+						"type": "String"
+					},
+					{
+						"name": "createdById",
+						"type": "String"
+					},
+					{
+						"name": "createdByUsername",
+						"type": "String"
+					},
+					{
+						"name": "updatedById",
+						"type": "String"
+					},
+					{
+						"name": "updatedByUsername",
+						"type": "String"
+					},
+					{
+						"name": "createdAt",
+						"type": "String"
+					},
+					{
+						"name": "updatedAt",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CMR_Dest1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1749,131 +2058,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/aitsAddressInfo')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_SQL_MDML_DMSandbox",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "id",
-						"type": "nchar"
-					},
-					{
-						"name": "addressLine1",
-						"type": "nvarchar"
-					},
-					{
-						"name": "addressLine2",
-						"type": "nvarchar"
-					},
-					{
-						"name": "addressLine3",
-						"type": "nvarchar"
-					},
-					{
-						"name": "archivedDate",
-						"type": "date"
-					},
-					{
-						"name": "city",
-						"type": "nvarchar"
-					},
-					{
-						"name": "county",
-						"type": "nvarchar"
-					},
-					{
-						"name": "isArchived",
-						"type": "smallint",
-						"precision": 5
-					},
-					{
-						"name": "isPrimary",
-						"type": "smallint",
-						"precision": 5
-					},
-					{
-						"name": "latitude",
-						"type": "nvarchar"
-					},
-					{
-						"name": "longitude",
-						"type": "nvarchar"
-					},
-					{
-						"name": "optedOut",
-						"type": "smallint",
-						"precision": 5
-					},
-					{
-						"name": "optedOutDate",
-						"type": "date"
-					},
-					{
-						"name": "stateLookup",
-						"type": "nvarchar"
-					},
-					{
-						"name": "statusLookup",
-						"type": "nvarchar"
-					},
-					{
-						"name": "statusDate",
-						"type": "date"
-					},
-					{
-						"name": "statusReason",
-						"type": "nvarchar"
-					},
-					{
-						"name": "typeLookup",
-						"type": "nvarchar"
-					},
-					{
-						"name": "zipCode",
-						"type": "nvarchar"
-					},
-					{
-						"name": "zipRoute",
-						"type": "nvarchar"
-					},
-					{
-						"name": "createdBy",
-						"type": "nvarchar"
-					},
-					{
-						"name": "createdDateGMT",
-						"type": "datetime2",
-						"scale": 0
-					},
-					{
-						"name": "updatedBy",
-						"type": "nvarchar"
-					},
-					{
-						"name": "updatedDateGMT",
-						"type": "datetime2",
-						"scale": 0
-					},
-					{
-						"name": "aitsBaselineId",
-						"type": "nvarchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "aitsaddressinfo"
-				}
 			},
 			"dependsOn": []
 		}

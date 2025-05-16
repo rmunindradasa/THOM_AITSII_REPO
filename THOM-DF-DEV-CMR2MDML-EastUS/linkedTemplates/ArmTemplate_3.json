@@ -3131,8 +3131,7 @@
 									"CMR": {},
 									"AitsMarketingPromotion": {},
 									"aitsEventContract": {}
-								},
-								"linkedServiceParameters": {}
+								}
 							},
 							"staging": {},
 							"compute": {
